@@ -1,3 +1,9 @@
+import os
+import sys
+
+# 1. Paksa Vercel mengenali folder app di luar folder api
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.database import Base, engine
@@ -16,6 +22,7 @@ from app.routers import submission_router
 from app.routers import typing_router
 from app.routers import analytics_router
 from app.routers.ai_router import router as ai_router
+
 app = FastAPI(
     title="IntegrityEdu API",
     version="1.0.0"
@@ -30,7 +37,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(bind=engine)
+# 2. KITA KOMENTARI/MATIKAN BARIS INI BIAR VERCEL KAGAK CRASH
+# Base.metadata.create_all(bind=engine)
 
 app.include_router(auth.router)
 app.include_router(class_router.router)
