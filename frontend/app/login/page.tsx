@@ -186,9 +186,7 @@ export default function LoginPage() {
             <Stack spacing={3}>
               <Box>
                 <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+  variant="h5"  sx={{ fontWeight: 600, mb: 1 }} >
                   Email
                 </Typography>
 
@@ -211,53 +209,39 @@ export default function LoginPage() {
 
               <Box>
                 <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+  variant="h5"  sx={{ fontWeight: 600, mb: 1 }} // Pindahkan fontWeight dan mb ke dalam objek sx
+>
                   Password
                 </Typography>
 
                 <TextField
-                  fullWidth
-                  type={
-                    showPassword
-                      ? "text"
-                      : "password"
-                  }
-                  placeholder="Masukkan password kamu"
-                  value={password}
-                  onChange={(e) =>
-                    setPassword(
-                      e.target.value
-                    )
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() =>
-                            setShowPassword(
-                              !showPassword
-                            )
-                          }
-                        >
-                          {showPassword ? (
-                            <VisibilityOffOutlinedIcon />
-                          ) : (
-                            <VisibilityOutlinedIcon />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root":
-                      {
-                        borderRadius: 4,
-                        bgcolor: "#FAFBFD",
-                      },
-                  }}
-                />
+  fullWidth
+  type={showPassword ? "text" : "password"}
+  placeholder="Masukkan password kamu"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  slotProps={{
+    input: {
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? (
+              <VisibilityOffOutlinedIcon />
+            ) : (
+              <VisibilityOutlinedIcon />
+            )}
+          </IconButton>
+        </InputAdornment>
+      ),
+    },
+  }}
+  sx={{
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 4,
+      bgcolor: "#FAFBFD",
+    },
+  }}
+/>
               </Box>
 
               <Box

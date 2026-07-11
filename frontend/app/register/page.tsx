@@ -198,10 +198,7 @@ export default function RegisterPage() {
           >
             <Stack spacing={3}>
                             <Box>
-                <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+                <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }} >
                   Nama Lengkap
                 </Typography>
 
@@ -222,10 +219,7 @@ export default function RegisterPage() {
               </Box>
 
               <Box>
-                <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+                <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }} >
                   Email
                 </Typography>
 
@@ -246,10 +240,7 @@ export default function RegisterPage() {
               </Box>
 
               <Box>
-                <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+                <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }} >
                   Password
                 </Typography>
 
@@ -296,10 +287,7 @@ export default function RegisterPage() {
               </Box>
 
               <Box>
-                <Typography
-                  fontWeight={600}
-                  mb={1}
-                >
+                <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }} >
                   Daftar Sebagai
                 </Typography>
 
