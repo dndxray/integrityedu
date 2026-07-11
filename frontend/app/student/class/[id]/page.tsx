@@ -22,7 +22,8 @@ import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import Navbar from "@/components/Navbar";
 import StudentSidebar from "@/components/StudentSidebar";
-const API_URL = "http://127.0.0.1:8000";
+// const API_URL = "http://127.0.0.1:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 export default function StudentClassPage() {
   const router = useRouter();
   const params = useParams();

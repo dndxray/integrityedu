@@ -30,7 +30,8 @@ import StudentSidebar from "@/components/StudentSidebar";
 import JoinClassModal from "@/components/JoinClassModal";
 import { getMyClasses } from "@/services/student";
 
-const API_URL = "http://127.0.0.1:8000";
+// const API_URL = "http://127.0.0.1:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 // TODO: field ini belum ada di backend (guru, jumlah tugas, status, jumlah
 // file, gradasi warna kartu). Sementara di-cycle dari array dummy biar

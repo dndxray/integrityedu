@@ -29,7 +29,7 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import CircleIcon from "@mui/icons-material/Circle";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 interface ClassData {
   id: number;
   class_name: string;
@@ -111,7 +111,9 @@ export default function TeacherPage() {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://127.0.0.1:8000/classes/my", {
+        const response = await fetch(
+  `${API_URL}/classes/my`,
+  {
           headers: {
             Authorization: `Bearer ${token}`,
           },
