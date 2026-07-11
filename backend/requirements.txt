@@ -49,6 +49,7 @@ jsonschema-specifications==2024.10.1
 jupyterlab_pygments==0.3.0
 kiwisolver==1.4.8
 MarkupSafe==3.0.2
+matplotlib==3.10.6
 matplotlib-inline==0.1.7
 mistune==3.1.2
 mysql-connector-python==9.7.0
@@ -56,9 +57,11 @@ nbclient==0.10.2
 nbconvert==7.16.6
 nbformat==5.10.4
 nest-asyncio==1.6.0
+numpy==2.2.4
 overrides==7.7.0
 packaging==24.2
 paho-mqtt==2.1.0
+pandas==2.2.3
 pandocfilters==1.5.1
 parso==0.8.4
 passlib==1.7.4
@@ -90,6 +93,8 @@ rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rpds-py==0.23.1
 rsa==4.9.1
+scikit-learn==1.8.0
+scipy==1.15.3
 Send2Trash==1.8.3
 setuptools==75.8.1
 six==1.17.0
@@ -117,6 +122,3 @@ webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
 Werkzeug==3.1.8
-email-validator==2.2.0
-email-validator==2.2.0
-python-multipart==0.0.9
