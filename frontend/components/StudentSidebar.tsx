@@ -155,9 +155,12 @@ export default function StudentSidebar() {
               </Box>
 
               <Typography
-                fontSize={14.5}
-                fontWeight={active ? 700 : 600}
-                color="inherit"
+                variant="body2"
+                sx={{
+                fontSize: 14.5,
+                fontWeight: active ? 700 : 600,
+                color: "inherit"
+              }}
               >
                 {menu.label}
               </Typography>
@@ -190,7 +193,7 @@ export default function StudentSidebar() {
           }}
         >
           <LogoutOutlinedIcon fontSize="small" />
-          <Typography fontSize={14.5} fontWeight={900} color="inherit">
+          <Typography variant="body2" sx={{ fontSize: 14.5, fontWeight: 900, color: "inherit" }}>
             Logout
           </Typography>
         </Box>

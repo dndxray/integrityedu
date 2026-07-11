@@ -122,7 +122,7 @@ export default function AssignmentsPage() {
 >
   <Typography
     variant="h4"
-    fontWeight={700}
+    sx={{ fontWeight: 700 }}
   >
     Assignments
   </Typography>
@@ -179,7 +179,7 @@ export default function AssignmentsPage() {
                         <Box>
                           <Typography
                             variant="h6"
-                            fontWeight={700}
+                            sx={{ fontWeight: 700 }}
                           >
                             {assignment.title}
                           </Typography>

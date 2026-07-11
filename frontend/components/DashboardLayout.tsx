@@ -32,8 +32,7 @@ export default function DashboardLayout({
       >
         <Typography
           variant="h5"
-          fontWeight="bold"
-          color="#2563EB"
+          sx={{ fontWeight: "bold", color: "#2563EB" }}
         >
           IntegrityEdu
         </Typography>
@@ -55,8 +54,7 @@ export default function DashboardLayout({
       >
         <Typography
           variant="h4"
-          fontWeight="bold"
-          mb={4}
+          sx={{ fontWeight: "bold", mb: 4 }}
         >
           {title}
         </Typography>

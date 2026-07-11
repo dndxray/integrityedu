@@ -237,14 +237,14 @@ async function handleSubmit() {
 
                   <Typography
                     variant="h4"
-                    fontWeight="bold"
+                    sx={{ fontWeight: "bold" }}
                   >
                     {assignment.title}
                   </Typography>
 
                   <Typography
-                    mt={1}
-                    color="text.secondary"
+                    variant="body2"
+                    sx={{ mt: 1, color: "text.secondary" }}
                   >
                     {assignment.description}
                   </Typography>
@@ -270,15 +270,15 @@ async function handleSubmit() {
   }}
 >
   <Typography
-    fontWeight={700}
-    mb={1}
+    variant="body1"
+    sx={{ fontWeight: 700, mb: 1 }}
   >
     Upload Assignment
   </Typography>
 
   <Typography
-    color="text.secondary"
-    mb={3}
+    variant="body2"
+    sx={{ color: "text.secondary", mb: 3 }}
   >
     PDF, DOCX, JPG, PNG
   </Typography>
@@ -312,7 +312,7 @@ async function handleSubmit() {
       bgcolor: "#EEF4FF",
     }}
   >
-    <Typography fontWeight={600}>
+    <Typography variant="body1" sx={{ fontWeight: 600 }}>
       📄 {selectedFile.name}
     </Typography>
 
@@ -391,7 +391,7 @@ async function handleSubmit() {
 
                     <Typography
                       variant="h6"
-                      fontWeight="bold"
+                      sx={{ fontWeight: "bold" }}
                     >
                       Live Typing
                     </Typography>
@@ -404,7 +404,7 @@ async function handleSubmit() {
 
                     <Typography
                       variant="h4"
-                      fontWeight="bold"
+                      sx={{ fontWeight: "bold" }}
                     >
                       {wordCount}
                     </Typography>
@@ -419,7 +419,7 @@ async function handleSubmit() {
                       {typingTime} sec
                     </Typography>
 
-                    <Typography mt={2}>
+                    <Typography variant="body1" sx={{ mt: 2 }}>
                       Average WPM
                     </Typography>
 
@@ -427,7 +427,7 @@ async function handleSubmit() {
                       {averageWpm}
                     </Typography>
 
-                    <Typography mt={2}>
+                    <Typography variant="body1" sx={{ mt: 2 }}>
                       Paste
                     </Typography>
 
@@ -435,7 +435,7 @@ async function handleSubmit() {
                       {pasteCount}
                     </Typography>
 
-                    <Typography mt={2}>
+                    <Typography variant="body1" sx={{ mt: 2 }}>
                       Tab Switch
                     </Typography>
 
@@ -443,10 +443,15 @@ async function handleSubmit() {
                       {tabSwitch}
                     </Typography>
 
-                    <Typography mt={2}> Pause </Typography>
+                    <Typography variant="body1" sx={{ mt: 2 }}>
+                      Pause
+                    </Typography>
 
-                    <Typography> {pauseCount} </Typography>
-                    <Typography mt={2}>
+                    <Typography>
+                      {pauseCount}
+                    </Typography>
+                    
+                    <Typography variant="body1" sx={{ mt: 2 }}>
                       Idle
                     </Typography>
                     <Typography>

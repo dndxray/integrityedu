@@ -318,8 +318,7 @@ export default function StudentPage() {
                 <Box sx={{ flex: 1 }}>
                   <Typography
                     variant="h5"
-                    fontWeight={800}
-                    sx={{ color: "#20243D", mb: 0.7 }}
+                    sx={{ fontWeight: 800, color: "#20243D", mb: 0.7 }}
                   >
                     {/* TODO: ganti dengan nama siswa asli dari backend */}
                     Selamat datang kembali, Rafi Akbar!
@@ -350,20 +349,15 @@ export default function StudentPage() {
                   </Button>
                 </Box>
                 <CalendarIllustration />
-
-                {/* <BooksIllustration /> */}
               </Stack>
             </CardContent>
           </Card>
-
-          {/* Stat cards: "Kelas Aktif" & "Total Tugas" pakai data asli,
-              2 lainnya masih placeholder sampai endpoint-nya ada. */}
-          <Grid container spacing={2.5} mb={4}>
+          <Grid container spacing={2.5} sx={{ mb: 4 }}>
             <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
               <Card sx={{ borderRadius: 2, height: "100%", boxShadow: "none", border: "1px solid #EEF0F6" }}>
                 <CardContent>
                   <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <Typography color="text.secondary" fontSize={14}>
+                    <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
                       Kelas Aktif
                     </Typography>
                     <Box
@@ -376,10 +370,10 @@ export default function StudentPage() {
                       <MenuBookRoundedIcon fontSize="small" />
                     </Box>
                   </Stack>
-                  <Typography variant="h4" fontWeight={800} mt={2}>
+                  <Typography variant="h4" sx={{ fontWeight: 800, mt: 2 }}>
                     {classes.length}
                   </Typography>
-                  <Typography color="text.secondary" fontSize={13} mt={0.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                     semester ini
                   </Typography>
                 </CardContent>
@@ -390,7 +384,7 @@ export default function StudentPage() {
               <Card sx={{ borderRadius: 2, height: "100%", boxShadow: "none", border: "1px solid #EEF0F6" }}>
                 <CardContent>
                   <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <Typography color="text.secondary" fontSize={14}>
+                    <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
                       Total Tugas
                     </Typography>
                     <Box
@@ -403,10 +397,10 @@ export default function StudentPage() {
                       <AssignmentRoundedIcon fontSize="small" />
                     </Box>
                   </Stack>
-                  <Typography variant="h4" fontWeight={800} mt={2}>
+                  <Typography variant="h4" sx={{ fontWeight: 800, mt: 2 }}>
                     {totalAssignments}
                   </Typography>
-                  <Typography color="text.secondary" fontSize={13} mt={0.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                     dari semua kelas
                   </Typography>
                 </CardContent>
@@ -417,7 +411,7 @@ export default function StudentPage() {
               <Card sx={{ borderRadius: 2, height: "100%", boxShadow: "none", border: "1px solid #EEF0F6" }}>
                 <CardContent>
                   <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <Typography color="text.secondary" fontSize={14}>
+                    <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
                       Perlu Dikumpulkan
                     </Typography>
                     <Box
@@ -431,10 +425,10 @@ export default function StudentPage() {
                     </Box>
                   </Stack>
                   {/* TODO: hitung dari endpoint tugas asli */}
-                  <Typography variant="h4" fontWeight={800} mt={2}>
+                  <Typography variant="h4" sx={{ fontWeight: 800, mt: 2 }}>
                     2
                   </Typography>
-                  <Typography color="text.secondary" fontSize={13} mt={0.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                     segera selesaikan
                   </Typography>
                 </CardContent>
@@ -445,7 +439,7 @@ export default function StudentPage() {
               <Card sx={{ borderRadius: 2, height: "100%", boxShadow: "none", border: "1px solid #EEF0F6" }}>
                 <CardContent>
                   <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <Typography color="text.secondary" fontSize={14}>
+                    <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
                       Skor Integritas
                     </Typography>
                     <Box
@@ -459,20 +453,16 @@ export default function StudentPage() {
                     </Box>
                   </Stack>
                   {/* TODO: ambil dari endpoint skor integritas AI */}
-                  <Typography variant="h4" fontWeight={800} mt={2} sx={{ color: "#059669" }}>
+                  <Typography variant="h4" sx={{ color: "#059669", fontWeight: 800, mt: 2 }}>
                     98%
                   </Typography>
-                  <Typography color="text.secondary" fontSize={13} mt={0.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                     rata-rata semua tugas
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
-
-          {/* "Classes" — kartu gradient horizontal kayak referensi.
-              Nama kelas & id dari data asli, sisanya (guru, files, avatar,
-              jumlah siswa) masih dummy dari classDemoMeta. */}
           <Stack
             sx={{
               flexDirection: "row",
@@ -481,7 +471,7 @@ export default function StudentPage() {
               mb: 2,
             }}
           >
-            <Typography variant="h6" fontWeight={700}>
+            <Typography variant="h6" sx={{fontWeight: 800}}>
               Classes
             </Typography>
             <Stack
@@ -495,7 +485,7 @@ export default function StudentPage() {
               }}
               onClick={() => router.push("/student/my-classes")}
             >
-              <Typography fontWeight={600} fontSize={14} color="inherit">
+              <Typography variant="body2" sx={{ fontWeight: 600, fontSize: 14, color: "inherit" }}>
                 View All
               </Typography>
               <ArrowForwardRoundedIcon sx={{ fontSize: 16 }} />
@@ -505,13 +495,13 @@ export default function StudentPage() {
           {classes.length === 0 ? (
             <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6", mb: 4 }}>
               <CardContent>
-                <Typography align="center" color="text.secondary">
+                <Typography variant="body2" sx={{ align: "center", color: "text.secondary" }}>
                   You haven&apos;t joined any classes.
                 </Typography>
               </CardContent>
             </Card>
           ) : (
-            <Grid container spacing={2.5} mb={4}>
+            <Grid container spacing={2.5} sx={{ mb: 4 }}>
               {classes.map((item, index) => {
                 const meta = classDemoMeta[index % classDemoMeta.length];
 
@@ -530,7 +520,7 @@ export default function StudentPage() {
                       onClick={() => router.push(`/student/class/${item.id}`)}
                     >
                       <CardContent sx={{ p: 2.5 }}>
-                        <Typography fontWeight={700} fontSize={16} mb={1.5}>
+                        <Typography variant="h6" sx={{ fontWeight: 700, fontSize: 16, mb: 1.5 }}>
                           {item.class_name}
                         </Typography>
 
@@ -560,12 +550,12 @@ export default function StudentPage() {
 
                         <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, mb: 0.8, opacity: 0.9 }}>
                           <FolderRoundedIcon sx={{ fontSize: 16 }} />
-                          <Typography fontSize={13}>{meta.files} Files</Typography>
+                          <Typography variant="body2" sx={{ fontSize: 13 }}>{meta.files} Files</Typography>
                         </Stack>
 
                         <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, opacity: 0.9 }}>
                           <PersonRoundedIcon sx={{ fontSize: 16 }} />
-                          <Typography fontSize={13}>Teacher: {meta.teacher}</Typography>
+                          <Typography variant="body2" sx={{ fontSize: 13 }}>Teacher: {meta.teacher}</Typography>
                         </Stack>
                       </CardContent>
                     </Card>
@@ -584,14 +574,16 @@ export default function StudentPage() {
 
             <Grid size={{ xs: 12, lg: 5 }}>
               <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-                <Typography variant="h6" fontWeight={700}>
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>
                   Tugas Terkini
                 </Typography>
                 <Typography
-                  color="primary"
-                  fontWeight={600}
-                  fontSize={14}
-                  sx={{ cursor: "pointer" }}
+                  variant="body2"
+                    sx={{ 
+                      cursor: "pointer", 
+                      color: "primary", 
+                      fontWeight: 600, 
+                      fontSize: 14 }}
                   onClick={() => router.push("/student/assignments")}
                 >
                   Semua Tugas
@@ -620,10 +612,10 @@ export default function StudentPage() {
                             }}
                           />
                           <Box>
-                            <Typography fontWeight={700} fontSize={14.5}>
+                            <Typography variant="body1" sx={{ fontWeight: 700, fontSize: 14.5 }}>
                               {task.title}
                             </Typography>
-                            <Typography color="text.secondary" fontSize={13}>
+                            <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13 }}>
                               {task.subject}
                             </Typography>
                           </Box>
@@ -663,10 +655,10 @@ export default function StudentPage() {
                   <Stack sx={{ flexDirection: "row", gap: 1.5, alignItems: "flex-start" }}>
                     <AutoAwesomeRoundedIcon color="primary" />
                     <Box>
-                      <Typography fontWeight={700} color="primary">
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: "primary" }}>
                         Pemeriksaan Integritas AI
                       </Typography>
-                      <Typography color="text.secondary" fontSize={13} mt={0.5}>
+                      <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                         Setiap tugas yang kamu kumpulkan akan diperiksa secara
                         otomatis untuk memastikan orisinalitas karyamu.
                       </Typography>

@@ -119,8 +119,8 @@ export default function IntegrityQuestionModal({
 
           <Typography
             align="center"
-            color="text.secondary"
-            py={5}
+            variant="body1"
+            sx={{ color: "text.secondary", py: 5 }}
           >
             Tidak ada pertanyaan yang diterima.
           </Typography>
@@ -134,8 +134,8 @@ export default function IntegrityQuestionModal({
               <Box key={index}>
 
                 <Typography
-                  fontWeight={700}
-                  mb={1}
+                  variant="body1"
+                  sx={{ fontWeight: 700, mb: 1 }}
                 >
                   {index + 1}. {question}
                 </Typography>
@@ -165,18 +165,13 @@ export default function IntegrityQuestionModal({
         <Divider sx={{ my: 4 }} />
 
         <Stack
-          direction="row"
-          justifyContent="flex-end"
-          spacing={2}
-        >
-
-          {/* <Button
-            color="inherit"
-            onClick={onClose}
-          >
-            Cancel
-          </Button> */}
-
+        sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        gap: 2, 
+      }}
+      >
           <Button
             variant="contained"
             disabled={

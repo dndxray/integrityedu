@@ -258,12 +258,13 @@ export default function RegisterPage() {
                       e.target.value
                     )
                   }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() =>
-                            setShowPassword(
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() =>
+                              setShowPassword(
                               !showPassword
                             )
                           }
@@ -276,12 +277,7 @@ export default function RegisterPage() {
                         </IconButton>
                       </InputAdornment>
                     ),
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 4,
-                      bgcolor: "#FAFBFD",
-                    },
+                    sx: { borderRadius: 4, bgcolor: "#FAFBFD", },},
                   }}
                 />
               </Box>
