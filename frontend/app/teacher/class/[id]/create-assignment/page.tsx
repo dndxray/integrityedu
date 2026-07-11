@@ -63,9 +63,8 @@ export default function CreateAssignmentPage() {
           <CardContent>
 
             <Typography
-              variant="h4"
-              fontWeight="bold"
-              mb={3}
+              variant="h4" sx={{ fontWeight: "bold", mt: 1,mb :3 }}
+              
             >
               Create Assignment
             </Typography>

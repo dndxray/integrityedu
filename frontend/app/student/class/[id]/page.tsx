@@ -240,7 +240,7 @@ export default function StudentClassPage() {
                       }}
                     />
 
-                    <Typography variant="h3" fontWeight={800}>
+                    <Typography variant="h3" sx={{ fontWeight: 800 }}>
                       {classroom?.class_name}
                     </Typography>
 
@@ -276,7 +276,7 @@ export default function StudentClassPage() {
                         Assignments
                       </Typography>
 
-                      <Typography variant="h3" fontWeight={700}>
+                      <Typography variant="h3" sx={{ fontWeight: 700 }}>
                         {assignments.length}
                       </Typography>
                     </CardContent>
@@ -298,10 +298,7 @@ export default function StudentClassPage() {
 
             <Typography
               variant="h5"
-              fontWeight={700}
-              sx={{
-                mb: 3,
-              }}
+              sx={{ mb: 3, fontWeight: 700 }}
             >
               Assignments
             </Typography>
@@ -379,7 +376,7 @@ export default function StudentClassPage() {
                             >
                               <AssignmentRoundedIcon color="primary" />
 
-                              <Typography variant="h6" fontWeight={700}>
+                              <Typography variant="h6" sx={{ fontWeight: 800 }}>
                                 {assignment.title}
                               </Typography>
                             </Stack>
@@ -412,7 +409,7 @@ export default function StudentClassPage() {
                               sx={{ borderRadius: 1.5 }}
                             />
 
-                            <Typography color="primary" fontWeight={700}>
+                            <Typography color="primary" sx={{ fontWeight: 700 }}>
                               Open →
                             </Typography>
                           </Stack>

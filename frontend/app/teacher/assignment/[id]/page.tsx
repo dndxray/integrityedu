@@ -51,11 +51,7 @@ export default function AssignmentSubmissionPage() {
     >
       <Container maxWidth="md">
 
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          mb={4}
-        >
+        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
           Student Submissions
         </Typography>
 
@@ -83,21 +79,21 @@ export default function AssignmentSubmissionPage() {
             >
               <CardContent>
 
-                <Typography fontWeight="bold">
+                <Typography sx={{ fontWeight: "bold" }}>
                   Student ID : {item.student_id}
                 </Typography>
 
                 <Typography
-                  color="text.secondary"
-                  mt={1}
+                  variant="body2"  sx={{ color: "text.secondary", mt: 1 }}
                 >
-                  Submission #{item.id}
+                  <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
+                    Submission #{item.id}
+                  </Typography>
                 </Typography>
 
                 <Typography
-                  mt={2}
-                  color="#2563EB"
-                  fontWeight="bold"
+                  variant="body2"
+                  sx={{ mt: 2, color: "#2563EB", fontWeight: "bold" }}
                 >
                   View Detail →
                 </Typography>

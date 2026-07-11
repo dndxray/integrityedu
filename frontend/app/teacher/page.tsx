@@ -86,10 +86,10 @@ function StatCard({
             {icon}
           </Box>
           <Box>
-            <Typography color="text.secondary" fontSize={13}>
+            <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13 }}>
               {label}
             </Typography>
-            <Typography variant="h5" fontWeight={700}>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
               {value}
             </Typography>
           </Box>
@@ -185,18 +185,18 @@ export default function TeacherPage() {
             }}
           >
             <Box>
-              <Typography variant="h4" fontWeight={700}>
+              <Typography variant="h4" sx={{ fontWeight: 700 }}>
                 Dashboard
               </Typography>
 
-              <Typography color="text.secondary" mt={0.5}>
+              <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5 }}>
                 Manage your classes and monitor learning activities.
               </Typography>
             </Box>
  
           </Stack>
 
-          <Grid container spacing={2.5} mb={4}>
+          <Grid container spacing={2.5} sx={{ mb: 4 }}>
             <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
               <StatCard
                 label="Total Classes"
@@ -245,11 +245,11 @@ export default function TeacherPage() {
                 }}
               >
                 <Box>
-                  <Typography variant="h5" fontWeight="bold">
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                     My Classes
                   </Typography>
 
-                  <Typography color="text.secondary" mt={0.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5 }}>
                     Click a class to manage assignments.
                   </Typography>
                 </Box>
@@ -286,10 +286,10 @@ export default function TeacherPage() {
                     <SchoolIcon
                       sx={{ fontSize: 40, color: "text.disabled" }}
                     />
-                    <Typography variant="h6" fontWeight={600} mt={2}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, mt: 2 }}>
                       Belum ada kelas
                     </Typography>
-                    <Typography color="text.secondary" mb={3}>
+                    <Typography variant="body2" sx={{ color: "text.secondary", mb: 3 }}>
                       Buat kelas pertamamu untuk mulai memantau aktivitas
                       belajar.
                     </Typography>
@@ -330,7 +330,7 @@ export default function TeacherPage() {
                                 mb: 1.5,
                               }}
                             >
-                              <Typography variant="h6" fontWeight={700}>
+                              <Typography variant="h6" sx={{ fontWeight: 700 }}>
                                 {cls.class_name}
                               </Typography>
                               <Chip

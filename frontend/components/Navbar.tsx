@@ -64,13 +64,6 @@ export default function Navbar() {
               }}
             />
           )}
-
-          {/* <Typography
-            variant="h6"
-            fontWeight="bold"
-          >
-            IntegrityEdu
-          </Typography> */}
         </Box>
 
         <Box

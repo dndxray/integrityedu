@@ -109,8 +109,8 @@ export default function SubmissionDetailPage() {
           }}>
         <Typography
           variant="h4"
-          fontWeight="bold"
-          mb={4}
+          
+          sx={{ fontWeight: "bold", mb: 4 }}
         >
           Submission Analysis
         </Typography>
@@ -129,7 +129,7 @@ export default function SubmissionDetailPage() {
 
                 <Typography
                   variant="h6"
-                  fontWeight="bold"
+                  sx={{ fontWeight: "bold" }}
                 >
                   Student Answer
                 </Typography>
@@ -137,21 +137,21 @@ export default function SubmissionDetailPage() {
                 <Divider sx={{ my: 2 }} />
 
                 <Typography
-                  color="text.secondary"
-                  mb={1}
+                  variant="body2"
+                  sx={{ color: "text.secondary", mb: 1 }}
                 >
                   Student ID
                 </Typography>
 
-                <Typography fontWeight="bold">
+                <Typography sx={{ fontWeight: "bold" }}>
                   {submission.student_id}
                 </Typography>
 
                 <Divider sx={{ my: 3 }} />
 
                 <Typography
-                  color="text.secondary"
-                  mb={1}
+                  variant="body2"
+                  sx={{ color: "text.secondary", mb: 1 }}
                 >
                   Essay
                 </Typography>
@@ -183,7 +183,7 @@ export default function SubmissionDetailPage() {
 
                   <Typography
                     variant="h6"
-                    fontWeight="bold"
+                    sx={{ fontWeight: "bold" }}
                   >
                     Overall Integrity
                   </Typography>
@@ -197,8 +197,8 @@ export default function SubmissionDetailPage() {
                   />
 
                   <Typography
-                    mt={2}
-                    fontWeight="bold"
+                    
+                    sx={{ fontWeight: "bold", mt: 2 }}
                   >
                     {status}
                   </Typography>
@@ -215,14 +215,14 @@ export default function SubmissionDetailPage() {
 
                   <Typography
                     variant="h6"
-                    fontWeight="bold"
+                    sx={{ fontWeight: "bold" }}
                   >
                     AI Analysis
                   </Typography>
 
                   <Divider sx={{ my: 2 }} />
 
-                  <Typography color="text.secondary">
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     AI Score
                   </Typography>
 
@@ -239,20 +239,18 @@ export default function SubmissionDetailPage() {
                   />
 
                   <Typography
-                    mt={3}
-                    color="text.secondary"
+                   
+                    variant="body2"
+                    sx={{ color: "text.secondary", mt: 3 }}
                   >
                     Result
                   </Typography>
 
-                  <Typography fontWeight="bold">
+                  <Typography sx={{ fontWeight: "bold", mt: 1 }}>
                     {submission.ai_result}
                   </Typography>
 
-                  <Typography
-                    mt={3}
-                    color="text.secondary"
-                  >
+                  <Typography sx={{ color: "text.secondary", mt: 3 }} >
                     Reason
                   </Typography>
 
@@ -260,10 +258,7 @@ export default function SubmissionDetailPage() {
                     {submission.ai_reason}
                   </Typography>
 
-                  <Typography
-                    mt={3}
-                    color="text.secondary"
-                  >
+                  <Typography sx={{ color: "text.secondary", mt: 3 }} >
                     Recommendation
                   </Typography>
 
@@ -285,8 +280,7 @@ export default function SubmissionDetailPage() {
 
                     <Typography
                       variant="h6"
-                      fontWeight="bold"
-                    >
+                      sx={{ fontWeight: "bold" }} >
                       Typing Behavior
                     </Typography>
 

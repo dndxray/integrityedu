@@ -170,10 +170,10 @@ export default function ClassDetailPage() {
                 </Avatar>
 
                 <Box>
-                  <Typography variant="h5" fontWeight={800}>
+                  <Typography variant="h5" sx={{fontWeight: 800 }}>
                     {classroom.class_name}
                   </Typography>
-                  <Typography color="text.secondary" fontSize={14}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
                     {classroom.description || "Kelas"}
                   </Typography>
                 </Box>
@@ -302,7 +302,7 @@ export default function ClassDetailPage() {
                   }}
                 >
                   {tab.icon}
-                  <Typography fontWeight={active ? 700 : 500} fontSize={14.5} color="inherit">
+                  <Typography variant="body2" sx={{ fontWeight: active ? 700 : 500, fontSize: 14.5, color: "inherit" }}>
                     {tab.label}
                   </Typography>
                 </Stack>
@@ -316,7 +316,7 @@ export default function ClassDetailPage() {
                 {assignments.length === 0 ? (
                   <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F3" }}>
                     <CardContent>
-                      <Typography align="center" color="text.secondary">
+                      <Typography variant="body2" sx={{ align: "center", color: "text.secondary" }}>
                         No assignments available.
                       </Typography>
                     </CardContent>
@@ -324,8 +324,6 @@ export default function ClassDetailPage() {
                 ) : (
                   <Stack sx={{ gap: 2.5 }}>
                     {assignments.map((item, index) => {
-                      // TODO: meta ini dummy, ganti begitu backend nyediain
-                      // status/progress/deteksi AI asli per tugas.
                       const meta =
                         demoAssignmentMeta[index % demoAssignmentMeta.length];
                       const percent = Math.round(
@@ -383,7 +381,7 @@ export default function ClassDetailPage() {
                                       gap: 1,
                                     }}
                                   >
-                                    <Typography variant="subtitle1" fontWeight={700}>
+                                    <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
                                       {item.title}
                                     </Typography>
                                     <Chip
@@ -397,7 +395,7 @@ export default function ClassDetailPage() {
                                       }}
                                     />
                                   </Stack>
-                                  <Typography color="text.secondary" fontSize={14} mt={0.3}>
+                                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14, mt: 0.3 }}>
                                     {item.description}
                                   </Typography>
                                 </Box>
@@ -412,10 +410,10 @@ export default function ClassDetailPage() {
                                   mb: 0.7,
                                 }}
                               >
-                                <Typography fontSize={13} color="text.secondary">
+                                <Typography variant="body2" sx={{ fontSize: 13, color: "text.secondary" }}>
                                   {meta.submitted} / {meta.total} dikumpulkan
                                 </Typography>
-                                <Typography fontSize={13} fontWeight={700}>
+                                <Typography variant="body2" sx={{ fontSize: 13, fontWeight: 700 }}>
                                   {percent}%
                                 </Typography>
                               </Stack>
@@ -452,7 +450,7 @@ export default function ClassDetailPage() {
                                 }}
                               >
                                 <CalendarTodayRoundedIcon sx={{ fontSize: 15 }} />
-                                <Typography fontSize={13}>
+                                <Typography variant="body2" sx={{ fontSize: 13 }}>
                                   Deadline:{" "}
                                   {new Date(item.deadline).toLocaleDateString(
                                     "id-ID",
@@ -495,7 +493,7 @@ export default function ClassDetailPage() {
               <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F3" }}>
                 <CardContent sx={{ textAlign: "center", py: 6 }}>
                   <PeopleAltRoundedIcon sx={{ fontSize: 36, color: "text.disabled" }} />
-                  <Typography color="text.secondary" mt={1.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", mt: 1.5 }}>
                     {/* TODO: belum ada endpoint daftar siswa per kelas */}
                     Daftar siswa belum tersedia.
                   </Typography>
@@ -507,7 +505,7 @@ export default function ClassDetailPage() {
               <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F3" }}>
                 <CardContent sx={{ textAlign: "center", py: 6 }}>
                   <BarChartRoundedIcon sx={{ fontSize: 36, color: "text.disabled" }} />
-                  <Typography color="text.secondary" mt={1.5}>
+                  <Typography variant="body2" sx={{ color: "text.secondary", mt: 1.5 }}>
                     {/* TODO: belum ada endpoint analitik kelas */}
                     Analitik belum tersedia.
                   </Typography>
@@ -554,10 +552,10 @@ function StatItem({
         {icon}
       </Box>
       <Box>
-        <Typography fontSize={13} color="text.secondary">
+        <Typography sx={{ fontSize: 13, color: "text.secondary" }}>
           {label}
         </Typography>
-        <Typography fontWeight={800} fontSize={17} sx={{ color: valueColor }}>
+        <Typography  sx={{ color: valueColor,fontWeight: 800,fontSize: 17 }}>
           {value}
         </Typography>
       </Box>
