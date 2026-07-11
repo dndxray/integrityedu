@@ -20,6 +20,7 @@ app = FastAPI(
     title="IntegrityEdu API",
     version="1.0.0"
 )
+handler = app
 
 app.add_middleware(
     CORSMiddleware,
