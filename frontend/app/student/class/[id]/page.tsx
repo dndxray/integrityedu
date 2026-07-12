@@ -11,7 +11,6 @@ import {
   CardContent,
   Chip,
   CircularProgress,
-  Container,
   Grid,
   Stack,
   Typography,
@@ -20,7 +19,9 @@ import {
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
-import Navbar from "@/components/Navbar";
+// Navbar dimatikan sesuai halaman lain (Dashboard/My Classes/Assignments) —
+// tinggal buka comment lagi kalau nanti mau dipakai lagi.
+// import Navbar from "@/components/Navbar";
 import StudentSidebar from "@/components/StudentSidebar";
 // const API_URL = "http://127.0.0.1:8000";
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
@@ -113,10 +114,11 @@ export default function StudentClassPage() {
     return (
       <>
         <StudentSidebar />
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Box
           sx={{
+            bgcolor: "#090f2f",
             ml: {
               xs: 0,
               md: "260px",
@@ -127,7 +129,7 @@ export default function StudentClassPage() {
             alignItems: "center",
           }}
         >
-          <CircularProgress />
+          <CircularProgress sx={{ color: "#3346C4" }} />
         </Box>
       </>
     );
@@ -136,293 +138,275 @@ export default function StudentClassPage() {
   return (
     <>
       <StudentSidebar />
-      <Navbar />
+      {/* <Navbar /> */}
 
+      {/* Background lavender + panel putih rounded, konsisten sama
+          Dashboard / My Classes / Assignments */}
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#F8FAFC",
+          bgcolor: "#EAF4FF",
+          ml: { xs: 0, md: "260px" },
+          p: { xs: 1.5, md: 3 },
         }}
       >
-        <Container
-          maxWidth={false}
-          disableGutters
+        <Box
           sx={{
-            ml: {
-              xs: 0,
-              md: "280px",
-            },
-
-            width: {
-              xs: "100%",
-              md: "calc(100% - 280px)",
-            },
-
-            pt: {
-              xs: 10,
-              md: 12,
-            },
-
-            pb: 5,
-
-            px: {
-              xs: 2,
-              sm: 3,
-              md: 4,
-              lg: 5,
-            },
+            bgcolor: "white",
+            borderRadius: 4,
+            minHeight: { md: "calc(100vh - 48px)" },
+            boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
+            p: { xs: 2.5, md: 4 },
           }}
         >
-          <Box sx={{ width: "100%" }}>
-            {/* Back link di atas banner, bukan di dalamnya lagi */}
-            <Button
-              startIcon={<ArrowBackRoundedIcon />}
-              onClick={() => router.back()}
+          {/* Back link di atas banner */}
+          <Button
+            startIcon={<ArrowBackRoundedIcon />}
+            onClick={() => router.back()}
+            sx={{
+              textTransform: "none",
+              fontWeight: 600,
+              color: "text.secondary",
+              mb: 2,
+              pl: 0,
+              "&:hover": {
+                bgcolor: "transparent",
+                color: "text.primary",
+              },
+            }}
+          >
+            Back
+          </Button>
+
+          <Card
+            sx={{
+              mb: 4,
+              borderRadius: 2,
+              
+                background: "linear-gradient(  135deg,  #6786F4 0%,  #7AA4F8 40%,  #90C9FB 75%,  #B8EDD8 100%)",
+              color: "white",
+              boxShadow: "0 16px 32px rgba(37,99,235,.22)",
+            }}
+          >
+            <CardContent
               sx={{
-                textTransform: "none",
-                fontWeight: 600,
-                color: "text.secondary",
-                mb: 2,
-                pl: 0,
-                "&:hover": {
-                  bgcolor: "transparent",
-                  color: "text.primary",
+                p: {
+                  xs: 3,
+                  md: 4,
                 },
               }}
             >
-              Back
-            </Button>
+              <Stack
+                sx={{
+                  flexDirection: {
+                    xs: "column",
+                    md: "row",
+                  },
+                  justifyContent: "space-between",
+                  alignItems: {
+                    xs: "flex-start",
+                    md: "center",
+                  },
+                  gap: 3,
+                }}
+              >
+                <Box sx={{ flex: 1 }}>
+                  <Chip
+                    icon={<SchoolRoundedIcon />}
+                    label={classroom?.class_code}
+                    sx={{
+                      mb: 2,
+                      bgcolor: "rgba(255,255,255,.15)",
+                      color: "white",
+                      borderRadius: 1.5,
 
-            <Card
+                      "& .MuiChip-icon": {
+                        color: "white",
+                      },
+                    }}
+                  />
+
+                  <Typography variant="h3" sx={{ fontWeight: 800 }}>
+                    {classroom?.class_name}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      mt: 2,
+                      opacity: 0.9,
+                      maxWidth: 700,
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {classroom?.description}
+                  </Typography>
+                </Box>
+
+                <Card
+                  sx={{
+                    bgcolor: "rgba(255,255,255,.12)",
+                    backdropFilter: "blur(12px)",
+                    borderRadius: 2,
+                    textAlign: "center",
+                    color: "white",
+                    minWidth: {
+                      xs: "100%",
+                      md: 180,
+                    },
+                    boxShadow: "none",
+                  }}
+                >
+                  <CardContent>
+                    <Typography sx={{ opacity: 0.8 }}>
+                      Assignments
+                    </Typography>
+
+                    <Typography variant="h3" sx={{ fontWeight: 700 }}>
+                      {assignments.length}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Stack>
+            </CardContent>
+          </Card>
+
+          {loadError && (
+            <Alert
+              severity="error"
               sx={{
-                mb: 4,
-                borderRadius: 2,
-                background:
-                  "linear-gradient(135deg,#4F46E5 0%,#2563EB 100%)",
-                color: "white",
-                boxShadow: "0 16px 32px rgba(37,99,235,.22)",
+                mb: 3,
               }}
             >
+              {loadError}
+            </Alert>
+          )}
+
+          <Typography
+            variant="h5"
+            sx={{ mb: 3, fontWeight: 700 }}
+          >
+            Assignments
+          </Typography>
+
+          {assignments.length === 0 ? (
+            <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6" }}>
               <CardContent
                 sx={{
-                  p: {
-                    xs: 3,
-                    md: 4,
-                  },
+                  py: 8,
                 }}
               >
-                <Stack
-                  sx={{
-                    flexDirection: {
-                      xs: "column",
-                      md: "row",
-                    },
-                    justifyContent: "space-between",
-                    alignItems: {
-                      xs: "flex-start",
-                      md: "center",
-                    },
-                    gap: 3,
-                  }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <Chip
-                      icon={<SchoolRoundedIcon />}
-                      label={classroom?.class_code}
-                      sx={{
-                        mb: 2,
-                        bgcolor: "rgba(255,255,255,.15)",
-                        color: "white",
-                        borderRadius: 1.5,
-
-                        "& .MuiChip-icon": {
-                          color: "white",
-                        },
-                      }}
-                    />
-
-                    <Typography variant="h3" sx={{ fontWeight: 800 }}>
-                      {classroom?.class_name}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        mt: 2,
-                        opacity: 0.9,
-                        maxWidth: 700,
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {classroom?.description}
-                    </Typography>
-                  </Box>
-
-                  {/* Stat card berdiri sendiri, nggak lagi digabung sama tombol Back */}
-                  <Card
-                    sx={{
-                      bgcolor: "rgba(255,255,255,.12)",
-                      backdropFilter: "blur(12px)",
-                      borderRadius: 2,
-                      textAlign: "center",
-                      color: "white",
-                      minWidth: {
-                        xs: "100%",
-                        md: 180,
-                      },
-                      boxShadow: "none",
-                    }}
-                  >
-                    <CardContent>
-                      <Typography sx={{ opacity: 0.8 }}>
-                        Assignments
-                      </Typography>
-
-                      <Typography variant="h3" sx={{ fontWeight: 700 }}>
-                        {assignments.length}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Stack>
+                <Typography align="center" color="text.secondary">
+                  No assignments available yet.
+                </Typography>
               </CardContent>
             </Card>
-
-            {loadError && (
-              <Alert
-                severity="error"
-                sx={{
-                  mb: 3,
-                }}
-              >
-                {loadError}
-              </Alert>
-            )}
-
-            <Typography
-              variant="h5"
-              sx={{ mb: 3, fontWeight: 700 }}
-            >
-              Assignments
-            </Typography>
-
-            {assignments.length === 0 ? (
-              <Card
-                sx={{
-                  borderRadius: 1.5,
-                }}
-              >
-                <CardContent
-                  sx={{
-                    py: 8,
+          ) : (
+            <Grid container spacing={2.5}>
+              {assignments.map((assignment) => (
+                <Grid
+                  key={assignment.id}
+                  size={{
+                    xs: 12,
                   }}
                 >
-                  <Typography align="center" color="text.secondary">
-                    No assignments available yet.
-                  </Typography>
-                </CardContent>
-              </Card>
-            ) : (
-              <Grid container spacing={3}>
-                {assignments.map((assignment) => (
-                  <Grid
-                    key={assignment.id}
-                    size={{
-                      xs: 12,
-                    }}
-                  >
-                    <Card
-                      sx={{
-                        borderRadius: 1.5,
-                        cursor: "pointer",
-                        border: "1px solid #EEF2F7",
-                        transition: ".2s",
+                  <Card
+                    sx={{
+                      borderRadius: 2,
+                      cursor: "pointer",
+                      border: "1px solid #EEF0F6",
+                      boxShadow: "none",
+                      transition: ".2s",
 
-                        "&:hover": {
-                          transform: "translateY(-3px)",
-                          boxShadow: "0 12px 28px rgba(15,23,42,.08)",
-                        },
-                      }}
-                      onClick={() =>
-                        router.push(
-                          `/student/assignment/${assignment.id}`
-                        )
-                      }
-                    >
-                      <CardContent
+                      "&:hover": {
+                        transform: "translateY(-2px)",
+                        boxShadow: "0 10px 24px rgba(15,23,42,.08)",
+                      },
+                    }}
+                    onClick={() =>
+                      router.push(
+                        `/student/assignment/${assignment.id}`
+                      )
+                    }
+                  >
+                    <CardContent sx={{ p: 2.5 }}>
+                      <Stack
                         sx={{
-                          p: 3,
+                          flexDirection: {
+                            xs: "column",
+                            lg: "row",
+                          },
+                          justifyContent: "space-between",
+                          alignItems: {
+                            xs: "flex-start",
+                            lg: "center",
+                          },
+                          gap: 2,
                         }}
                       >
-                        <Stack
-                          sx={{
-                            flexDirection: {
-                              xs: "column",
-                              lg: "row",
-                            },
-                            justifyContent: "space-between",
-                            alignItems: {
-                              xs: "flex-start",
-                              lg: "center",
-                            },
-                            gap: 3,
-                          }}
-                        >
-                          <Box sx={{ flex: 1 }}>
-                            <Stack
-                              sx={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                gap: 1.5,
-                                mb: 1.5,
-                              }}
-                            >
-                              <AssignmentRoundedIcon color="primary" />
+                        <Stack sx={{ flexDirection: "row", gap: 2, alignItems: "flex-start" }}>
+                          <Box
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: 1.5,
+                              bgcolor: "#EEF2FF",
+                              color: "#3346C4",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexShrink: 0,
+                            }}
+                          >
+                            <AssignmentRoundedIcon fontSize="small" />
+                          </Box>
 
-                              <Typography variant="h6" sx={{ fontWeight: 800 }}>
-                                {assignment.title}
-                              </Typography>
-                            </Stack>
+                          <Box>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                              {assignment.title}
+                            </Typography>
 
                             <Typography
                               color="text.secondary"
-                              sx={{
-                                lineHeight: 1.8,
-                              }}
+                              
+                              sx={{fontSize:{xs: 13.5, sm: 14}, mt: 0.3, lineHeight: 1.6 }}
                             >
                               {assignment.description}
                             </Typography>
                           </Box>
-
-                          <Stack
-                            sx={{
-                              gap: 1.5,
-                              alignItems: {
-                                xs: "flex-start",
-                                lg: "flex-end",
-                              },
-                            }}
-                          >
-                            <Chip
-                              color="primary"
-                              variant="outlined"
-                              label={`Due • ${new Date(
-                                assignment.deadline
-                              ).toLocaleDateString()}`}
-                              sx={{ borderRadius: 1.5 }}
-                            />
-
-                            <Typography color="primary" sx={{ fontWeight: 700 }}>
-                              Open →
-                            </Typography>
-                          </Stack>
                         </Stack>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-          </Box>
-        </Container>
+
+                        <Stack
+                          sx={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 1.5,
+                            flexShrink: 0,
+                          }}
+                        >
+                          <Chip
+                            size="small"
+                            label={`Due • ${new Date(
+                              assignment.deadline
+                            ).toLocaleDateString()}`}
+                            sx={{
+                              bgcolor: "#FFF7ED",
+                              color: "#C2410C",
+                              fontWeight: 600,
+                            }}
+                          />
+
+                          <Typography sx={{ color: "#3346C4", fontWeight: 700, fontSize: 14 }}>
+                            Open →
+                          </Typography>
+                        </Stack>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
       </Box>
     </>
   );

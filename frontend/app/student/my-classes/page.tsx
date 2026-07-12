@@ -90,7 +90,7 @@ export default function MyClassesPage() {
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#EEF0FB",
+          bgcolor: "#EAF4FF",
           ml: { xs: 0, md: "260px" },
           p: { xs: 1.5, md: 3 },
         }}

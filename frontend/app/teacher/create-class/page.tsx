@@ -2,22 +2,42 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Fraunces, IBM_Plex_Mono, Poppins } from "next/font/google";
 
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  Container,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
 
-import Navbar from "@/components/Navbar";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+
+// import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
 import { createClass } from "@/services/class";
+
+// Font & warna disamain persis sama TeacherPage biar satu tema (bukan
+// sans-serif default MUI polos).
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const ink = "#0B2545";
+const steel = "#2C6E9E";
+const slate = "#5B6B82";
+const line = "#D9E3F0";
 
 export default function CreateClassPage() {
   const router = useRouter();
@@ -49,75 +69,66 @@ export default function CreateClassPage() {
   return (
     <>
       <Sidebar />
-      <Navbar />
-
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#F8FAFC",
+          bgcolor: "#EAF4FF",
+          ml: { xs: 0, md: "260px" },
+          p: { xs: 1.5, md: 3 },
         }}
       >
-        <Container
-          maxWidth="md"
+        <Box
+          className={poppins.className}
           sx={{
-            ml: {
-              xs: 0,
-              md: "280px",
-            },
-            pt: {
-              xs: 10,
-              md: 12,
-            },
-            pb: 5,
-            px: {
-              xs: 2,
-              md: 3,
-            },
+            bgcolor: "white",
+            borderRadius: 3,
+            minHeight: { md: "calc(100vh - 48px)" },
+            boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
+            p: { xs: 2.5, md: 4 },
           }}
         >
           <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 700,
-            }}
+            className={fraunces.className}
+            sx={{ fontSize: { xs: 26, md: 32 }, fontWeight: 600, fontStyle: "italic", color: ink }}
           >
             Create Class
           </Typography>
 
-          <Typography
-            color="text.secondary"
-            sx={{
-              mt: 1,
-              mb: 4,
-            }}
-          >
-            Create a new class and invite students using the generated class
-            code.
+          <Typography sx={{ color: slate, mt: 1, mb: 4, maxWidth: 520 }}>
+            Buat kelas baru dan undang murid pakai kode kelas yang dibuat.
           </Typography>
 
-          <Card
+          <Box
             sx={{
-              borderRadius: 3,
-              border: "1px solid #E5E7EB",
-              boxShadow: "0 2px 8px rgba(15,23,42,.05)",
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1.3fr 1fr" },
+              gap: 3,
+              alignItems: "start",
             }}
           >
-            <CardContent
+            {/* Form */}
+            <Box
               sx={{
-                p: 4,
+                border: `1px solid ${line}`,
+                borderRadius: "4px 20px 4px 4px",
+                p: { xs: 2.5, md: 3.5 },
               }}
             >
-              <Stack
-                spacing={3}
-              >
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
                 <TextField
                   fullWidth
                   label="Class Name"
                   placeholder="Example: Mobile Programming"
                   value={className}
-                  onChange={(e) =>
-                    setClassName(e.target.value)
-                  }
+                  onChange={(e) => setClassName(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 1.5,
+                      "& fieldset": { borderColor: line },
+                      "&:hover fieldset": { borderColor: steel },
+                      "&.Mui-focused fieldset": { borderColor: steel },
+                    },
+                  }}
                 />
 
                 <TextField
@@ -127,51 +138,60 @@ export default function CreateClassPage() {
                   label="Description"
                   placeholder="Write a short description about this class..."
                   value={description}
-                  onChange={(e) =>
-                    setDescription(e.target.value)
-                  }
+                  onChange={(e) => setDescription(e.target.value)}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 1.5,
+                      "& fieldset": { borderColor: line },
+                      "&:hover fieldset": { borderColor: steel },
+                      "&.Mui-focused fieldset": { borderColor: steel },
+                    },
+                  }}
                 />
 
-                <Stack
-                  direction={{
-                    xs: "column",
-                    sm: "row",
-                  }}
-                  spacing={2}
+                <Box
                   sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "row" },
                     justifyContent: "flex-end",
+                    gap: 1.5,
                   }}
                 >
                   <Button
                     variant="outlined"
-                    color="inherit"
+                    onClick={() => router.back()}
                     sx={{
                       textTransform: "none",
-                      borderRadius: 2,
+                      borderRadius: 1.5,
+                      borderColor: line,
+                      color: ink,
+                      fontWeight: 600,
+                      "&:hover": { borderColor: steel, bgcolor: "#F6FAFE" },
                     }}
-                    onClick={() =>
-                      router.back()
-                    }
                   >
                     Cancel
                   </Button>
 
                   <Button
                     variant="contained"
+                    onClick={handleCreate}
                     sx={{
                       textTransform: "none",
-                      borderRadius: 2,
+                      borderRadius: 1.5,
                       px: 4,
+                      bgcolor: ink,
+                      fontWeight: 700,
+                      boxShadow: "none",
+                      "&:hover": { bgcolor: "#0A1F3D", boxShadow: "none" },
                     }}
-                    onClick={handleCreate}
                   >
                     Create Class
                   </Button>
-                </Stack>
-              </Stack>
-            </CardContent>
-          </Card>
-        </Container>
+                </Box>
+              </Box>
+            </Box>            
+          </Box>
+        </Box>
       </Box>
     </>
   );

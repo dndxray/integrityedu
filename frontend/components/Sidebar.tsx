@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Poppins } from "next/font/google";
 
 import {
   Box,
-  Button,
   Divider,
   Drawer,
   IconButton,
@@ -18,10 +18,15 @@ import { useTheme } from "@mui/material/styles";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+//import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+});
 
 export default function Sidebar() {
   const router = useRouter();
@@ -32,22 +37,25 @@ export default function Sidebar() {
 
   const [open, setOpen] = useState(false);
 
+  // Path & logout logic tetap sama seperti sebelumnya, cuma tampilannya
+  // disamain kayak StudentSidebar.
   const menus = [
     {
       label: "Dashboard",
       path: "/teacher",
-      icon: <DashboardRoundedIcon />,
+      icon: <HomeOutlinedIcon fontSize="small" />,
+    },
+    {
+      label: "My Classes",
+      path: "/teacher/class",
+      icon: <AddOutlinedIcon fontSize="small" />,
     },
     {
       label: "Create Class",
       path: "/teacher/create-class",
-      icon: <AddRoundedIcon />,
+      icon: <AddOutlinedIcon fontSize="small" />,
     },
-    // {
-    //   label: "Analytics",
-    //   path: "/teacher/analytics",
-    //   icon: <BarChartRoundedIcon />,
-    // },
+
   ];
 
   function logout() {
@@ -55,125 +63,137 @@ export default function Sidebar() {
     router.push("/login");
   }
 
-  
-
-const sidebarContent = (
-  <Box
-    sx={{
-      width: 260,
-      height: "100%",
-      bgcolor: "white",
-      display: "flex",
-      flexDirection: "column",
-    }}
-  >
-    {/* Header */}
+  const sidebarContent = (
     <Box
-  sx={{
-    px: 3,
-    height: 64,
-    display: "flex",
-    alignItems: "center",
-  }}
->
+      className={poppins.className}
+      sx={{
+        width: 260,
+        height: "100%",
+        bgcolor: "#EAF4FF",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
+          px: 3,
+          pt: 3,
+          pb: 2.5,
         }}
       >
-        <SchoolRoundedIcon
-          color="primary"
-          fontSize="large"
-        />
-
-        <Typography
-          variant="h5"
+        <Box
           sx={{
-            fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
           }}
         >
-          IntegrityEdu
-        </Typography>
+          <SchoolRoundedIcon
+            fontSize="large"
+            sx={{
+              color: "#64748b",
+            }}
+          />
+
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+              color: "#64748b",
+            }}
+          >
+            IntegrityEdu
+          </Typography>
+        </Box>
       </Box>
 
-      {/* <Typography
-        variant="body2"
-        color="text.secondary"
+      <Divider sx={{ mx: 3, borderColor: "#D9E7F5" }} />
+
+      <Stack spacing={2} sx={{ px: 2.5, py: 3 }}>
+        {menus.map((menu) => {
+          const active = pathname === menu.path;
+
+          return (
+            <Box
+              key={menu.path}
+              onClick={() => {
+                router.push(menu.path);
+
+                if (mobile) {
+                  setOpen(false);
+                }
+              }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+                px: 1.5,
+                py: 1.4,
+                borderRadius: 1.5,
+                cursor: "pointer",
+                color: active ? "#173c70" : "#64748b",
+                transition: "color 0.15s ease",
+                "&:hover": {
+                  color: active ? "#173c70" : "#64748b",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: active ? "#64748b" : "inherit",
+                }}
+              >
+                {menu.icon}
+              </Box>
+
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: 16.5,
+                  fontWeight: active ? 700 : 600,
+                  color: "#64748b",
+                }}
+              >
+                {menu.label}
+              </Typography>
+            </Box>
+          );
+        })}
+      </Stack>
+
+      <Box
         sx={{
-          mt: 0.5,
+          mt: "auto",
+          px: 2.5,
+          pb: 3,
         }}
       >
-        Teacher Panel
-      </Typography> */}
-    </Box>
-
-    <Divider />
-
-    {/* Menu */}
-    <Stack
-      spacing={1}
-      sx={{
-        p: 2,
-        flex: 1,
-      }}
-    >
-      {menus.map((menu) => (
-        <Button
-          key={menu.path}
-          fullWidth
-          startIcon={menu.icon}
-          variant={
-            pathname === menu.path
-              ? "contained"
-              : "text"
-          }
+        <Box
+          onClick={logout}
           sx={{
-            justifyContent: "flex-start",
-            textTransform: "none",
-            borderRadius: 3,
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            px: 1.5,
             py: 1.4,
-            fontWeight: 600,
-          }}
-          onClick={() => {
-            router.push(menu.path);
-
-            if (mobile) {
-              setOpen(false);
-            }
+            borderRadius: 1.5,
+            cursor: "pointer",
+            color: "#e01515",
+            "&:hover": {
+              color: "#DC2626",
+            },
           }}
         >
-          {menu.label}
-        </Button>
-      ))}
-    </Stack>
-
-    <Divider />
-
-    {/* Footer */}
-    <Box
-      sx={{
-        p: 2,
-      }}
-    >
-      <Button
-        fullWidth
-        color="error"
-        startIcon={<LogoutRoundedIcon />}
-        sx={{
-          justifyContent: "flex-start",
-          textTransform: "none",
-          borderRadius: 3,
-          py: 1.3,
-        }}
-        onClick={logout}
-      >
-        Logout
-      </Button>
+          <LogoutOutlinedIcon fontSize="small" />
+          <Typography variant="body2" sx={{ fontSize: 14.5, fontWeight: 900, color: "inherit" }}>
+            Logout
+          </Typography>
+        </Box>
+      </Box>
     </Box>
-  </Box>
-);
+  );
 
   return (
     <>
@@ -186,33 +206,30 @@ const sidebarContent = (
               top: 12,
               left: 12,
               zIndex: 1400,
-              bgcolor: "white",
+              bgcolor: "#EEF0FB",
               boxShadow: 2,
             }}
           >
             <MenuRoundedIcon />
           </IconButton>
 
-          <Drawer
-            open={open}
-            onClose={() => setOpen(false)}
-          >
+          <Drawer open={open} onClose={() => setOpen(false)}>
             {sidebarContent}
           </Drawer>
         </>
       ) : (
         <Box
-  sx={{
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: 260,
-    height: "100vh",
-    bgcolor: "white",
-    borderRight: 0,
-    zIndex: 1200,
-  }}
->
+          sx={{
+            position: "fixed",
+            left: 0,
+            top: 0,
+            width: 260,
+            height: "100vh",
+            borderRight: "1px solid #4e7ba8",
+            bgcolor: "#EEF0FB",
+            zIndex: 1300,
+          }}
+        >
           {sidebarContent}
         </Box>
       )}

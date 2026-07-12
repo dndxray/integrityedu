@@ -25,8 +25,6 @@ import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 
-// Font geometris/rounded biar lebih deket ke gaya font di referensi
-// (bukan default Roboto bawaan MUI). Cuma dipakai di komponen ini.
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
@@ -77,7 +75,7 @@ export default function StudentSidebar() {
       sx={{
         width: 260,
         height: "100%",
-        bgcolor: "#EEF0FB",
+        bgcolor: "#EAF4FF",
         display: "flex",
         flexDirection: "column",
       }}
@@ -100,12 +98,15 @@ export default function StudentSidebar() {
         <SchoolRoundedIcon
           // color="primary"
           fontSize="large"
+          sx={{
+            color: "#64748b"
+          }}
         />
 
         <Typography
           variant="h5"
           sx={{
-            fontWeight: 700,
+            fontWeight: 700, color: "#64748b"
           }}
         >
           IntegrityEdu
@@ -113,7 +114,7 @@ export default function StudentSidebar() {
       </Box>
       </Box>
 
-      <Divider sx={{ mx: 3, borderColor: "#F1F5F9" }} />
+      <Divider sx={{ mx: 3, borderColor: "#D9E7F5" }} />
 
       <Stack spacing={2} sx={{ px: 2.5, py: 3 }}>
         {menus.map((menu) => {
@@ -137,18 +138,19 @@ export default function StudentSidebar() {
                 py: 1.4,
                 borderRadius: 1.5,
                 cursor: "pointer",
-                color: active ? "#1E293B" : "#94A3B8",
+                color: active ? "#173c70" : "#64748b",
                 transition: "color 0.15s ease",
                 "&:hover": {
-                  color: active ? "#1E293B" : "#475569",
+                  color: active ? "#173c70" : "#64748b",
                 },
               }}
             >
+              {/* home */}
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  color: active ? "#000000" : "inherit",
+                  color: active ? "#64748b" : "inherit",
                 }}
               >
                 {menu.icon}
@@ -157,9 +159,9 @@ export default function StudentSidebar() {
               <Typography
                 variant="body2"
                 sx={{
-                fontSize: 14.5,
+                fontSize: 16.5,
                 fontWeight: active ? 700 : 600,
-                color: "inherit"
+                color: "#64748b"
               }}
               >
                 {menu.label}

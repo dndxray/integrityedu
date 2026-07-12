@@ -19,7 +19,9 @@ import {
 } from "@mui/material";
 
 import StudentSidebar from "@/components/StudentSidebar";
-import Navbar from "@/components/Navbar";
+// Navbar dimatikan sesuai halaman lain (Dashboard/My Classes) — tinggal
+// buka comment lagi kalau nanti mau dipakai lagi.
+// import Navbar from "@/components/Navbar";
 import { getAssignmentDetail } from "@/services/assignment";
 import { saveTypingLog } from "@/services/typing";
 import {  uploadAssignment,  checkSubmission,generateQuestions,} from "@/services/submission";
@@ -201,39 +203,34 @@ async function handleSubmit() {
   return (
     <>
       <StudentSidebar />
-      <Navbar />
+      {/* <Navbar /> */}
 
+      {/* Background lavender + panel putih rounded, konsisten sama
+          halaman Dashboard & My Classes */}
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#F5F7FB",
+          bgcolor: "#EAF4FF",
+          ml: { xs: 0, md: "260px" },
+          p: { xs: 1.5, md: 3 },
         }}
       >
-        <Container
-          maxWidth="lg"
+        <Box
           sx={{
-            ml: {
-              xs: 0,
-              md: "280px",
-            },
-            pt: {
-              xs: 9,
-              md: 10,
-            },
-            pb: 5,
-            px: {
-                    xs: 2,
-              md: 0,
-            },
+            bgcolor: "white",
+            borderRadius: 4,
+            minHeight: { md: "calc(100vh - 48px)" },
+            boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
+            p: { xs: 2.5, md: 4 },
           }}
         >
           <Grid container spacing={3}>
 
             <Grid size={{ xs: 12, md: 8 }}>
 
-              <Card>
+              <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6" }}>
 
-                <CardContent>
+                <CardContent sx={{ p: 3 }}>
 
                   <Typography
                     variant="h4"
@@ -250,8 +247,7 @@ async function handleSubmit() {
                   </Typography>
 
                   <Chip
-                    sx={{ mt: 3 }}
-                    color="primary"
+                    sx={{ mt: 3, bgcolor: "#EEF2FF", color: "#3346C4", fontWeight: 600 }}
                     label={`Deadline : ${new Date(
                       assignment.deadline
                     ).toLocaleDateString("id-ID")}`}
@@ -264,9 +260,10 @@ async function handleSubmit() {
     p: 4,
     mb: 4,
     borderStyle: "dashed",
-    borderRadius: 3,
+    borderRadius: 2,
+    borderColor: "#E2E4F5",
     textAlign: "center",
-    bgcolor: "#FAFAFA",
+    bgcolor: "#F8F9FD",
   }}
 >
   <Typography
@@ -286,6 +283,7 @@ async function handleSubmit() {
   <Button
     variant="outlined"
     component="label"
+    sx={{ borderRadius: 2, textTransform: "none" }}
   >
     Choose File
 
@@ -309,7 +307,8 @@ async function handleSubmit() {
       mt: 2,
       p: 2,
       borderRadius: 2,
-      bgcolor: "#EEF4FF",
+      bgcolor: "#EEF2FF",
+      boxShadow: "none",
     }}
   >
     <Typography variant="body1" sx={{ fontWeight: 600 }}>
@@ -362,13 +361,26 @@ async function handleSubmit() {
 
                       setWordCount(words);
                     }}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
 
                   <Button
                     variant="contained"
                     size="large"
                     fullWidth
-                    sx={{ mt: 4 }}
+                    sx={{
+                      mt: 4,
+                      borderRadius: 2,
+                      textTransform: "none",
+                      fontWeight: 700,
+                      bgcolor: "#3346C4",
+                      boxShadow: "none",
+                      "&:hover": { bgcolor: "#26339C", boxShadow: "none" },
+                    }}
                     disabled={submitted}
                     onClick={handleSubmit}
                   >
@@ -385,9 +397,9 @@ async function handleSubmit() {
 
               <Stack spacing={3}>
 
-                <Card>
+                <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6" }}>
 
-                  <CardContent>
+                  <CardContent sx={{ p: 3 }}>
 
                     <Typography
                       variant="h6"
@@ -462,14 +474,15 @@ async function handleSubmit() {
               </Stack>
             </Grid>
           </Grid>
-        </Container>
+        </Box>
+      </Box>
 
-        <IntegrityQuestionModal
-          open={questionOpen}
-          loading={questionLoading}
-          questions={questions}
-          onClose={() => setQuestionOpen(false)}
-          onSubmit={async (answers) => {
+      <IntegrityQuestionModal
+        open={questionOpen}
+        loading={questionLoading}
+        questions={questions}
+        onClose={() => setQuestionOpen(false)}
+        onSubmit={async (answers) => {
 
     const token = localStorage.getItem("token");
 
@@ -499,9 +512,7 @@ async function handleSubmit() {
     }
 
 }}
-        />
-
-      </Box>
+      />
     </>
   );
 }

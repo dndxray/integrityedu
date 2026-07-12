@@ -16,7 +16,6 @@ import {
 
 import { createAssignment } from "@/services/assignment";
 import Sidebar from "@/components/Sidebar";
-import Navbar from "@/components/Navbar";
 
 export default function CreateAssignmentPage() {
   const router = useRouter();
@@ -46,37 +45,41 @@ export default function CreateAssignmentPage() {
       alert(result.detail);
     }
   }
-
   return (
     <>
       <Sidebar />
-      <Navbar />
       <Box
-      sx={{
-        minHeight: "100vh",
-        bgcolor: "#f5f7fb",
-        py: 5,
-      }}
-    >
+        sx={{
+          minHeight: "100vh",
+          bgcolor: "#EAF4FF",
+          ml: { xs: 0, md: "260px" },
+          p: { xs: 1.5, md: 3 },
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: "white",
+            borderRadius: 3,
+            minHeight: { md: "calc(100vh - 48px)" },
+            boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
+            p: { xs: 2.5, md: 4 },
+          }}
+        >
       <Container maxWidth="sm">
         <Card>
           <CardContent>
-
             <Typography
               variant="h4" sx={{ fontWeight: "bold", mt: 1,mb :3 }}
               
             >
               Create Assignment
             </Typography>
-
             <Stack spacing={3}>
-
               <TextField
                 label="Title"
                 value={title}
                 onChange={(e)=>setTitle(e.target.value)}
               />
-
               <TextField
                 label="Description"
                 multiline
@@ -84,25 +87,22 @@ export default function CreateAssignmentPage() {
                 value={description}
                 onChange={(e)=>setDescription(e.target.value)}
               />
-
               <TextField
                 type="datetime-local"
                 value={deadline}
                 onChange={(e)=>setDeadline(e.target.value)}
               />
-
               <Button
                 variant="contained"
                 onClick={handleSubmit}
               >
                 Create Assignment
               </Button>
-
             </Stack>
-
           </CardContent>
         </Card>
       </Container>
+      </Box>
     </Box>
     </>
   );

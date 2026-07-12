@@ -36,8 +36,6 @@ import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import { getAssignments } from "@/services/assignment";
 import { getClassDetail } from "@/services/class";
 import Sidebar from "@/components/Sidebar";
-import Navbar from "@/components/Navbar";
-
 interface Assignment {
   id: number;
   title: string;
@@ -107,30 +105,23 @@ export default function ClassDetailPage() {
   return (
     <>
       <Sidebar />
-      <Navbar />
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#F5F7FB",
+          bgcolor: "#EAF4FF",
+          ml: { xs: 0, md: "260px" },
+          p: { xs: 1.5, md: 3 },
         }}
       >
-        {/* Header putih: back link, avatar+judul kelas, kode kelas, tombol buat tugas */}
         <Box
           sx={{
             bgcolor: "white",
-            borderBottom: "1px solid #EEF0F3",
-            pb: 3,
+            borderRadius: 3,
+            minHeight: { md: "calc(100vh - 48px)" },
+            boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
+            p: { xs: 2.5, md: 4 },
           }}
         >
-          <Container
-            maxWidth="lg"
-            sx={{
-              ml: { xs: 0, md: "280px" },
-              maxWidth: { md: "calc(100vw - 280px)" },
-              pt: { xs: 9, md: 4 },
-              px: { xs: 2, md: 4 },
-            }}
-          >
             <Typography
               sx={{
                 display: "inline-flex",
@@ -262,19 +253,18 @@ export default function ClassDetailPage() {
                 valueColor="#059669"
               />
             </Stack>
-          </Container>
-        </Box>
+        
 
         {/* Tabs: cuma "Tugas" yang beneran render konten asli. "Siswa" &
             "Analitik" masih placeholder, belum ada endpoint-nya. */}
-        <Container
+        {/* <Container
           maxWidth="lg"
           sx={{
             ml: { xs: 0, md: "280px" },
             maxWidth: { md: "calc(100vw - 280px)" },
             px: { xs: 2, md: 4 },
           }}
-        >
+        > */}
           <Stack
             sx={{
               flexDirection: "row",
@@ -513,7 +503,8 @@ export default function ClassDetailPage() {
               </Card>
             )}
           </Box>
-        </Container>
+        {/* </Container> */}
+        </Box>
       </Box>
     </>
   );

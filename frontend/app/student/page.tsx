@@ -163,7 +163,7 @@ function CalendarIllustration() {
                V42
                H0
                Z"
-            fill="#F56AA2"
+            fill="#5A7EF0"
           />
 
           {/* Rings */}
@@ -173,7 +173,7 @@ function CalendarIllustration() {
             width="8"
             height="30"
             rx="4"
-            fill="#4A352A"
+            fill="#475569"
           />
 
           <rect
@@ -182,7 +182,7 @@ function CalendarIllustration() {
             width="8"
             height="30"
             rx="4"
-            fill="#4A352A"
+            fill="#475569"
           />
 
           {/* Date */}
@@ -192,7 +192,7 @@ function CalendarIllustration() {
             textAnchor="middle"
             fontSize="58"
             fontWeight="700"
-            fill="#4A352A"
+            fill="#22304A"
             fontFamily="Inter, sans-serif"
           >
             {dayNumber}
@@ -269,7 +269,7 @@ export default function StudentPage() {
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#EEF0FB",
+          bgcolor: "#EAF4FF",
           ml: { xs: 0, md: "260px" },
           p: { xs: 1.5, md: 3 },
         }}
@@ -302,7 +302,7 @@ export default function StudentPage() {
             sx={{
               mb: 3,
               borderRadius: 2,
-              background: "linear-gradient(120deg, #EEF1FF 0%, #E3E7FF 55%, #F3E8FF 100%)",
+              background: "linear-gradient(135deg, #FCFDFF  0%, #EDF5FF 45%, #ECF5FF 100%)",
               boxShadow: "none",
               overflow: "hidden",
             }}
@@ -335,7 +335,7 @@ export default function StudentPage() {
                     onClick={() => setJoinOpen(true)}
                     sx={{
                       mt: 2.5,
-                      bgcolor: "#3346C4",
+                      bgcolor: "#79b8f3",
                       color: "white",
                       textTransform: "none",
                       borderRadius: 999,
@@ -343,7 +343,7 @@ export default function StudentPage() {
                       py: 1.1,
                       fontWeight: 700,
                       boxShadow: "none",
-                      "&:hover": { bgcolor: "#26339C", boxShadow: "none" },
+                      "&:hover": { bgcolor: "#080d35", boxShadow: "none" },
                     }}
                   >
                     + Gabung Kelas
@@ -464,116 +464,113 @@ export default function StudentPage() {
               </Card>
             </Grid>
           </Grid>
-          <Stack
-            sx={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <Typography variant="h6" sx={{fontWeight: 800}}>
-              Classes
-            </Typography>
-            <Stack
-              sx={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 0.5,
-                cursor: "pointer",
-                color: "#3346C4",
-                fontWeight: 600,
-              }}
-              onClick={() => router.push("/student/my-classes")}
-            >
-              <Typography variant="body2" sx={{ fontWeight: 600, fontSize: 14, color: "inherit" }}>
-                View All
-              </Typography>
-              <ArrowForwardRoundedIcon sx={{ fontSize: 16 }} />
-            </Stack>
-          </Stack>
-
-          {classes.length === 0 ? (
-            <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6", mb: 4 }}>
-              <CardContent>
-                <Typography variant="body2" sx={{ align: "center", color: "text.secondary" }}>
-                  You haven&apos;t joined any classes.
-                </Typography>
-              </CardContent>
-            </Card>
-          ) : (
-            <Grid container spacing={2.5} sx={{ mb: 4 }}>
-              {classes.map((item, index) => {
-                const meta = classDemoMeta[index % classDemoMeta.length];
-
-                return (
-                  <Grid key={item.id} size={{ xs: 12, sm: 6, lg: 4 }}>
-                    <Card
-                      sx={{
-                        borderRadius: 1,
-                        background: meta.gradient,
-                        color: "white",
-                        cursor: "pointer",
-                        boxShadow: "none",
-                        transition: ".2s",
-                        "&:hover": { transform: "translateY(-3px)" },
-                      }}
-                      onClick={() => router.push(`/student/class/${item.id}`)}
-                    >
-                      <CardContent sx={{ p: 2.5 }}>
-                        <Typography variant="h6" sx={{ fontWeight: 700, fontSize: 16, mb: 1.5 }}>
-                          {item.class_name}
-                        </Typography>
-
-                        <AvatarGroup
-                          max={4}
-                          sx={{
-                            justifyContent: "flex-end",
-                            flexDirection: "row-reverse",
-                            mb: 2,
-                            "& .MuiAvatar-root": {
-                              width: 26,
-                              height: 26,
-                              fontSize: 11,
-                              border: "2px solid rgba(255,255,255,0.4)",
-                            },
-                          }}
-                        >
-                          {meta.avatarColors.map((c, i) => (
-                            <Avatar key={i} sx={{ bgcolor: c }}> </Avatar>
-                          ))}
-                          {meta.extraStudents > 0 && (
-                            <Avatar sx={{ bgcolor: "rgba(255,255,255,0.25)", fontSize: 11 }}>
-                              +{meta.extraStudents}
-                            </Avatar>
-                          )}
-                        </AvatarGroup>
-
-                        <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, mb: 0.8, opacity: 0.9 }}>
-                          <FolderRoundedIcon sx={{ fontSize: 16 }} />
-                          <Typography variant="body2" sx={{ fontSize: 13 }}>{meta.files} Files</Typography>
-                        </Stack>
-
-                        <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, opacity: 0.9 }}>
-                          <PersonRoundedIcon sx={{ fontSize: 16 }} />
-                          <Typography variant="body2" sx={{ fontSize: 13 }}>Teacher: {meta.teacher}</Typography>
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          )}
-
-          {/* Dua kolom: kiri detail kelas (data asli, list biasa),
-              kanan "Tugas Terkini" (masih statis, belum ada endpoint). */}
+          {/* Dua kolom 50/50: kiri "Classes" (cuma 2 kelas pertama, sisanya
+              lewat View All), kanan "Tugas Terkini". */}
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12, lg: 7 }}>
+            <Grid size={{ xs: 12, lg: 6 }}>
+              <Stack
+                sx={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <Typography variant="h6" sx={{fontWeight: 800}}>
+                  Classes
+                </Typography>
+                <Stack
+                  sx={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 0.5,
+                    cursor: "pointer",
+                    color: "#3346C4",
+                    fontWeight: 600,
+                  }}
+                  onClick={() => router.push("/student/my-classes")}
+                >
+                  <Typography variant="body2" sx={{ fontWeight: 600, fontSize: 14, color: "inherit" }}>
+                    View All
+                  </Typography>
+                  <ArrowForwardRoundedIcon sx={{ fontSize: 16 }} />
+                </Stack>
+              </Stack>
 
+              {classes.length === 0 ? (
+                <Card sx={{ borderRadius: 2, boxShadow: "none", border: "1px solid #EEF0F6" }}>
+                  <CardContent>
+                    <Typography variant="body2" sx={{ align: "center", color: "text.secondary" }}>
+                      You haven&apos;t joined any classes.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Stack sx={{ gap: 2 }}>
+                  {classes.slice(0, 2).map((item, index) => {
+                    const meta = classDemoMeta[index % classDemoMeta.length];
+
+                    return (
+                      <Card
+                        key={item.id}
+                        sx={{
+                          borderRadius: 1,
+                          background: meta.gradient,
+                          color: "white",
+                          cursor: "pointer",
+                          boxShadow: "none",
+                          transition: ".2s",
+                          "&:hover": { transform: "translateY(-3px)" },
+                        }}
+                        onClick={() => router.push(`/student/class/${item.id}`)}
+                      >
+                        <CardContent sx={{ p: 2.5 }}>
+                          <Typography variant="h6" sx={{ fontWeight: 700, fontSize: 16, mb: 1.5 }}>
+                            {item.class_name}
+                          </Typography>
+
+                          <AvatarGroup
+                            max={4}
+                            sx={{
+                              justifyContent: "flex-end",
+                              flexDirection: "row-reverse",
+                              mb: 2,
+                              "& .MuiAvatar-root": {
+                                width: 26,
+                                height: 26,
+                                fontSize: 11,
+                                border: "2px solid rgba(255,255,255,0.4)",
+                              },
+                            }}
+                          >
+                            {meta.avatarColors.map((c, i) => (
+                              <Avatar key={i} sx={{ bgcolor: c }}> </Avatar>
+                            ))}
+                            {meta.extraStudents > 0 && (
+                              <Avatar sx={{ bgcolor: "rgba(255,255,255,0.25)", fontSize: 11 }}>
+                                +{meta.extraStudents}
+                              </Avatar>
+                            )}
+                          </AvatarGroup>
+
+                          <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, mb: 0.8, opacity: 0.9 }}>
+                            <FolderRoundedIcon sx={{ fontSize: 16 }} />
+                            <Typography variant="body2" sx={{ fontSize: 13 }}>{meta.files} Files</Typography>
+                          </Stack>
+
+                          <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 0.7, opacity: 0.9 }}>
+                            <PersonRoundedIcon sx={{ fontSize: 16 }} />
+                            <Typography variant="body2" sx={{ fontSize: 13 }}>Teacher: {meta.teacher}</Typography>
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </Stack>
+              )}
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 5 }}>
+            <Grid size={{ xs: 12, lg: 6 }}>
               <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
                   Tugas Terkini
@@ -647,25 +644,11 @@ export default function StudentPage() {
                 sx={{
                   mt: 2.5,
                   borderRadius: 1,
-                  border: "1px solid #E0E7FF",
-                  bgcolor: "#F5F5FF",
+                  border: "1px solid #ffffff",
+                  bgcolor: "#ffffff",
                   boxShadow: "none",
                 }}
               >
-                <CardContent>
-                  <Stack sx={{ flexDirection: "row", gap: 1.5, alignItems: "flex-start" }}>
-                    <AutoAwesomeRoundedIcon color="primary" />
-                    <Box>
-                      <Typography variant="h6" sx={{ fontWeight: 700, color: "primary" }}>
-                        Pemeriksaan Integritas AI
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
-                        Setiap tugas yang kamu kumpulkan akan diperiksa secara
-                        otomatis untuk memastikan orisinalitas karyamu.
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </CardContent>
               </Card>
             </Grid>
           </Grid>
