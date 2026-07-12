@@ -25,13 +25,14 @@ export async function getClassDetail(
   id: number
 ) {
   const response = await fetch(
-    `http://127.0.0.1:8000/classes/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  `${API_URL}/classes/${id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+// const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   return response.json();
 }
