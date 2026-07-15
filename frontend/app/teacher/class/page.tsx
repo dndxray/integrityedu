@@ -35,7 +35,7 @@ import BrushRoundedIcon from "@mui/icons-material/BrushRounded";
 import TranslateRoundedIcon from "@mui/icons-material/TranslateRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import Sidebar from "@/components/Sidebar";
-// import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 interface ClassData {
   id: number;
@@ -161,6 +161,7 @@ export default function TeacherPage() {
   return (
     <>
       <Sidebar />
+      <Navbar/>
       <Box
         sx={{
           minHeight: "100vh",

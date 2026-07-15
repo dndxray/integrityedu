@@ -1,3 +1,388 @@
+// "use client";
+
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+
+// import {
+//   Box,
+//   Button,
+//   Card,
+//   Checkbox,
+//   FormControlLabel,
+//   IconButton,
+//   InputAdornment,
+//   Link,
+//   Stack,
+//   TextField,
+//   Typography,
+// } from "@mui/material";
+
+// import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+// import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+// import { login } from "@/services/auth";
+
+// export default function LoginPage() {
+//   const router = useRouter();
+
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const [showPassword, setShowPassword] =
+//     useState(false);
+
+//   async function handleLogin() {
+//     const result = await login({
+//       email,
+//       password,
+//     });
+
+//     if (!result.access_token) {
+//       alert("Email atau password salah");
+//       return;
+//     }
+
+//     localStorage.setItem(
+//       "token",
+//       result.access_token
+//     );
+
+//     router.push("/loading");
+//   }
+
+//   return (
+//     <Box
+//       sx={{
+//         minHeight: "100vh",
+//         bgcolor: "#F5F7FC",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         p: {
+//           xs: 0,
+//           md: 4,
+//         },
+//       }}
+//     >
+// <Card
+//   sx={{
+//     width: "100%",
+//     maxWidth: 1200,
+
+//     minHeight: {
+//       xs: "100vh",
+//       md: 720,
+//     },
+
+//     display: "flex",
+
+//     flexDirection: {
+//       xs: "column",
+//       md: "row",
+//     },
+
+//     position: "relative",
+
+//     overflow: {
+//       xs: "visible",
+//       md: "hidden",
+//     },
+
+//     borderRadius: {
+//       xs: 0,
+//       md: 5,
+//     },
+
+//     bgcolor: "#F5F7FC",
+//   }}
+// >
+//         {/* Panel gradient — tetap muncul di HP sebagai banner pendek di
+//             atas form, tapi logo & teks sapaannya disembunyiin di mobile. */}
+//         <Box
+//           sx={{
+//             width: {
+//               xs: "100%",
+//               md: "42%",
+//             },
+//             height: {
+//               xs: 220,
+//               md: "auto",
+//             },
+//             flexShrink: 0,
+//             display: "flex",
+//             p: { xs: 3, md: 6 },
+//             color: "white",
+//             position: "relative",
+//             overflow: "hidden",
+//             background:
+//               "linear-gradient(160deg, #6C8DFF 0%, #7CB8FF 50%, #B7F5D8 100%)",
+
+//             "&::before": {
+//               content: '""',
+//               position: "absolute",
+//               width: { xs: 220, md: 420 },
+//               height: { xs: 220, md: 420 },
+//               borderRadius: "50%",
+//               top: { xs: -100, md: -180 },
+//               right: { xs: -70, md: -120 },
+//               background: "rgba(255,255,255,.12)",
+//               filter: "blur(20px)",
+//             },
+
+//             "&::after": {
+//               content: '""',
+//               position: "absolute",
+//               width: { xs: 260, md: 520 },
+//               height: { xs: 260, md: 520 },
+//               borderRadius: "50%",
+//               bottom: { xs: -140, md: -250 },
+//               left: { xs: -90, md: -180 },
+//               background: "rgba(255,255,255,.10)",
+//               filter: "blur(30px)",
+//             },
+//           }}
+//         >
+//           {/* Logo — cuma tampil di md ke atas, disembunyiin di HP */}
+//           <Typography
+//             sx={{
+//               display: { xs: "none", md: "block" },
+//               position: "absolute",
+//               top: { xs: 18, md: 55 },
+//               left: "50%",
+//               transform: "translateX(-50%)",
+//               fontSize: { xs: 15, md: 18 },
+//               fontWeight: 600,
+//               zIndex: 2,
+//             }}
+//           >
+//             IntegrityEdu
+//           </Typography>
+
+//           {/* Judul "Halo, Selamat Datang!" — cuma tampil di md ke atas.
+//               Logikanya: display: {xs:"none", md:"block"} bikin dia hilang
+//               total (nggak cuma invisible, beneran nggak di-render) pas
+//               layar HP, tapi balik normal begitu lebar layar >= breakpoint md. */}
+//           <Box
+//             sx={{
+//               display: { xs: "none", md: "block" },
+//               position: "absolute",
+//               top: "50%",
+//               left: "50%",
+//               transform: "translate(-50%, -50%)",
+//               textAlign: "center",
+//               zIndex: 2,
+//               width: "100%",
+//               px: 2,
+//             }}
+//           >
+//             <Typography
+//               sx={{
+//                 fontWeight: 800,
+//                 fontSize: 56,
+//                 lineHeight: 1.35,
+//               }}
+//             >
+//               Halo,
+//               <br />
+//               Selamat
+//               <br />
+//               Datang!
+//             </Typography>
+//           </Box>
+//         </Box>
+
+//         <Box
+//           sx={{
+//             flex: 1,
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             bgcolor: "#FFFFFF",
+//             position: "relative",
+//             zIndex: 1,
+//             mt: { xs: -3, md: 0 },
+//             borderTopLeftRadius: { xs: 70, md: 0 },
+//             borderTopRightRadius: { xs: 70, md: 0 },
+//             p: {
+//               xs: 4,
+//               md: 7,
+//             },
+//           }}
+//         >
+//           <Box
+//             sx={{
+//               width: "100%",
+//               maxWidth: 460,
+//             }}
+//           >
+//             <Stack spacing={3}>
+//               <Box>
+//                 <Typography
+//   variant="h5"  sx={{ fontWeight: 600, mb: 1 }} >
+//                   Email
+//                 </Typography>
+
+//                 <TextField
+//                   fullWidth
+//                   placeholder="contoh@email.com"
+//                   value={email}
+//                   onChange={(e) =>
+//                     setEmail(e.target.value)
+//                   }
+//                   sx={{
+//                     "& .MuiOutlinedInput-root":
+//                       {
+//                         borderRadius: 4,
+//                         bgcolor: "#FAFBFD",
+//                       },
+//                   }}
+//                 />
+//               </Box>
+
+//               <Box>
+//                 <Typography
+//   variant="h5"  sx={{ fontWeight: 600, mb: 1 }} // Pindahkan fontWeight dan mb ke dalam objek sx
+// >
+//                   Password
+//                 </Typography>
+
+//                 <TextField
+//   fullWidth
+//   type={showPassword ? "text" : "password"}
+//   placeholder="Masukkan password kamu"
+//   value={password}
+//   onChange={(e) => setPassword(e.target.value)}
+//   slotProps={{
+//     input: {
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <IconButton onClick={() => setShowPassword(!showPassword)}>
+//             {showPassword ? (
+//               <VisibilityOffOutlinedIcon />
+//             ) : (
+//               <VisibilityOutlinedIcon />
+//             )}
+//           </IconButton>
+//         </InputAdornment>
+//       ),
+//     },
+//   }}
+//   sx={{
+//     "& .MuiOutlinedInput-root": {
+//       borderRadius: 4,
+//       bgcolor: "#FAFBFD",
+//     },
+//     "& input::-ms-reveal, & input::-ms-clear": {
+//       display: "none",
+//     },
+//   }}
+// />
+//               </Box>
+
+//               <Box
+//                 sx={{
+//                   display: "flex",
+//                   justifyContent:
+//                     "space-between",
+//                   alignItems: "center",
+//                 }}
+//               >
+//                 <FormControlLabel
+//                   control={
+//                     <Checkbox
+//                       size="small"
+//                     />
+//                   }
+//                   label="Ingat saya"
+//                 />
+
+//                 <Typography
+//                   sx={{
+//                     color: "#7DA2F8",
+//                     fontWeight: 600,
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   Lupa password?
+//                 </Typography>
+//               </Box>
+
+//               <Button
+//                 variant="contained"
+//                 size="large"
+//                 onClick={handleLogin}
+//                 sx={{
+//                   py: 1.8,
+//                   borderRadius: 4,
+//                   fontWeight: 700,
+//                   fontSize: 16,
+//                   textTransform: "none",
+//                   color: "#fff",
+
+//                   background:
+//                     "linear-gradient(90deg, #6A8FFF 0%, #78A9FF 30%, #88C9FF 65%, #AEEFD9 100%)",
+//                   boxShadow:
+//                     "0 10px 25px rgba(137, 251, 255, 0.35)",
+
+//                   "&:hover": {
+//                     background:
+//                       "linear-gradient(90deg, #6C8DFF 0%, #79AAFF 25%, #89C8FF 55%, #9DDDEB 80%, #B7F5D8 100%)",
+//                   },
+//                 }}
+//               >
+//                 Masuk
+//               </Button>
+
+//               <Box
+//                 sx={{
+//                   display: "flex",
+//                   alignItems: "center",
+//                   gap: 2,
+//                 }}
+//               >
+//                 <Box
+//                   sx={{
+//                     flex: 1,
+//                     height: 1,
+//                     bgcolor: "#E5E7EB",
+//                   }}
+//                 />
+//                 <Box
+//                   sx={{
+//                     flex: 1,
+//                     height: 1,
+//                     bgcolor: "#E5E7EB",
+//                   }}
+//                 />
+//               </Box>
+//               <Typography
+//                 align="center"
+//                 color="text.secondary"
+//               >
+//                 Belum punya akun?{" "}
+//                 <Link
+//                   component="button"
+//                   underline="none"
+//                   onClick={() =>
+//                     router.push(
+//                       "/register"
+//                     )
+//                   }
+//                   sx={{
+//                     color: "#7DA2F8",
+//                     fontWeight: 700,
+//                   }}
+//                 >
+//                   Daftar sekarang
+//                 </Link>
+//               </Typography>
+//             </Stack>
+//           </Box>
+//         </Box>
+//       </Card>
+//     </Box>
+//   );
+// }
+
 "use client";
 
 import { useState } from "react";

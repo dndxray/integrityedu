@@ -19,11 +19,8 @@ import {
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
-// Navbar dimatikan sesuai halaman lain (Dashboard/My Classes/Assignments) —
-// tinggal buka comment lagi kalau nanti mau dipakai lagi.
-// import Navbar from "@/components/Navbar";
+import StudentNavbar from "@/components/StudentNavbar";
 import StudentSidebar from "@/components/StudentSidebar";
-// const API_URL = "http://127.0.0.1:8000";
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 export default function StudentClassPage() {
   const router = useRouter();
@@ -49,10 +46,6 @@ export default function StudentClassPage() {
           return;
         }
 
-        // ==========================
-        // Class Detail
-        // ==========================
-
         const classResponse = await fetch(
           `${API_URL}/classes/student/${classId}`,
           {
@@ -72,10 +65,6 @@ export default function StudentClassPage() {
           );
           return;
         }
-
-        // ==========================
-        // Assignment List
-        // ==========================
 
         const assignmentResponse = await fetch(
           `${API_URL}/assignments/student/${classId}`,
@@ -113,8 +102,8 @@ export default function StudentClassPage() {
   if (loading) {
     return (
       <>
-        <StudentSidebar />
-        {/* <Navbar /> */}
+      <StudentSidebar />
+      <StudentNavbar />
 
         <Box
           sx={{
@@ -138,10 +127,7 @@ export default function StudentClassPage() {
   return (
     <>
       <StudentSidebar />
-      {/* <Navbar /> */}
-
-      {/* Background lavender + panel putih rounded, konsisten sama
-          Dashboard / My Classes / Assignments */}
+      <StudentNavbar />
       <Box
         sx={{
           minHeight: "100vh",
@@ -159,25 +145,6 @@ export default function StudentClassPage() {
             p: { xs: 2.5, md: 4 },
           }}
         >
-          {/* Back link di atas banner */}
-          <Button
-            startIcon={<ArrowBackRoundedIcon />}
-            onClick={() => router.back()}
-            sx={{
-              textTransform: "none",
-              fontWeight: 600,
-              color: "text.secondary",
-              mb: 2,
-              pl: 0,
-              "&:hover": {
-                bgcolor: "transparent",
-                color: "text.primary",
-              },
-            }}
-          >
-            Back
-          </Button>
-
           <Card
             sx={{
               mb: 4,

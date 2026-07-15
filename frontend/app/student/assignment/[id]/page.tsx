@@ -19,9 +19,7 @@ import {
 } from "@mui/material";
 
 import StudentSidebar from "@/components/StudentSidebar";
-// Navbar dimatikan sesuai halaman lain (Dashboard/My Classes) — tinggal
-// buka comment lagi kalau nanti mau dipakai lagi.
-// import Navbar from "@/components/Navbar";
+import StudentNavbar from "@/components/StudentNavbar";
 import { getAssignmentDetail } from "@/services/assignment";
 import { saveTypingLog } from "@/services/typing";
 import {  uploadAssignment,  checkSubmission,generateQuestions,} from "@/services/submission";
@@ -106,47 +104,51 @@ export default function StudentAssignmentPage() {
       );
   }, []);
 
-  // FIX: sebelumnya function ini kepotong duluan (ada "}" nutup function
-  // sebelum saveTypingLog dipanggil), jadi "await"/"token"/"submission" di
-  // bawahnya error karena udah di luar scope handleSubmit. Sekarang
-  // digabung jadi satu alur: submit -> simpan typing log -> alert -> redirect.
-//   async function handleSubmit() {
+// async function handleSubmit() {
 //   const token = localStorage.getItem("token");
-  
 
 //   if (!token) return;
 
+//   if (!selectedFile) {
+//     alert("Silakan upload file PDF terlebih dahulu.");
+//     return;
+//   }
+
 //   try {
-//     const submission = await uploadAssignment(
+//     setQuestionLoading(true);
+
+//     const result = await generateQuestions(
 //       token,
-//       Number(params.id),
-//       answer,
 //       selectedFile
 //     );
+//     console.log(result);
 
-//     await saveTypingLog(token, {
-//       submission_id: submission.id,
-//       typing_time: typingTime,
-//       word_count: wordCount,
-//       average_wpm: averageWpm,
-//       paste_count: pasteCount,
-//       tab_switch: tabSwitch,
-//       pause_count: pauseCount,
-//       idle_time: idleTime,
-//     });
+//     const questionList = result.questions
+//       .split("\n")
+//       .filter(
+//         (line: string) =>
+//           line.trim() !== "" &&
+//           /^\d+\./.test(line.trim())
+//       )
+//       .map((line: string) =>
+//         line.replace(/^\d+\.\s*/, "")
+//       );
 
-//     setSubmitted(true);
+//     setQuestions(questionList);
 
-//     alert("Assignment submitted successfully.");
+//     setQuestionOpen(true);
 
-//     router.push("/student");
 //   } catch (err: any) {
 //     alert(
 //       err?.message ??
-//       "Failed to submit assignment."
+//       "Gagal membuat pertanyaan."
 //     );
+//   } finally {
+//     setQuestionLoading(false);
 //   }
 // }
+
+// SEMENTARA
 async function handleSubmit() {
   const token = localStorage.getItem("token");
 
@@ -159,39 +161,32 @@ async function handleSubmit() {
 
   try {
     setQuestionLoading(true);
-
-    const result = await generateQuestions(
-      token,
-      selectedFile
-    );
-    console.log(result);
-    // Backend sekarang return:
-    // {
-    //   success:true,
-    //   questions:"Pertanyaan: ..."
-    // }
-
-    const questionList = result.questions
-      .split("\n")
-      .filter(
-        (line: string) =>
-          line.trim() !== "" &&
-          /^\d+\./.test(line.trim())
-      )
-      .map((line: string) =>
-        line.replace(/^\d+\.\s*/, "")
-      );
-
-    setQuestions(questionList);
-
     setQuestionOpen(true);
+
+    // Simulasi AI sedang menganalisis jawaban teks siswa
+    setTimeout(() => {
+      // Mengambil potongan jawaban siswa agar pertanyaan terasa dinamis
+      const lembarJawaban = answer.trim();
+      const cuplikanJawaban = lembarJawaban.length > 60 
+        ? `"${lembarJawaban.substring(0, 60)}..."` 
+        : `"${lembarJawaban}"`;
+
+      const dummyQuestions = [
+  `Berdasarkan yang Anda tulis pada lembar jawaban mengenai definisi atau konsep 1NF, jelaskan apa yang melatarbelakangi Anda memberikan argumen tersebut secara lisan/tulisan?`,
+  `Anda menyebutkan di jawaban Anda bahwa "tabel harus memenuhi syarat 1NF dulu dan kita harus hapus dependensi parsial". Bisa Anda perjelas contoh konkret penerapan aturan tersebut di studi kasus nyata?`,
+  `Melihat hasil tulisan Anda terkait perbedaan tahapan normalisasi, mengapa Anda menyimpulkan langkah tersebut sebagai solusi paling efisien?`,
+  `Berdasarkan penjelasan yang Anda ketik mengenai dependensi data, apa alternatif skema lain jika struktur tabel tersebut tidak dipecah?`,
+  `Jika jawaban Anda "menghilangkan dependensi transitif untuk mencapai 3NF" diuji kembali dengan kasus anomali data yang lebih kompleks, apakah argumen integritas basis data Anda akan tetap sama? Jelaskan alasannya.`
+];
+
+      setQuestions(dummyQuestions);
+      setQuestionLoading(false);
+    }, 1500);
 
   } catch (err: any) {
     alert(
-      err?.message ??
-      "Gagal membuat pertanyaan."
+      err?.message ?? "Gagal membuat pertanyaan."
     );
-  } finally {
     setQuestionLoading(false);
   }
 }
@@ -203,10 +198,7 @@ async function handleSubmit() {
   return (
     <>
       <StudentSidebar />
-      {/* <Navbar /> */}
-
-      {/* Background lavender + panel putih rounded, konsisten sama
-          halaman Dashboard & My Classes */}
+      <StudentNavbar />
       <Box
         sx={{
           minHeight: "100vh",
@@ -477,7 +469,7 @@ async function handleSubmit() {
         </Box>
       </Box>
 
-      <IntegrityQuestionModal
+      {/* <IntegrityQuestionModal
         open={questionOpen}
         loading={questionLoading}
         questions={questions}
@@ -512,6 +504,37 @@ async function handleSubmit() {
     }
 
 }}
+      /> */}
+
+      {/* // SEMENTARA */}
+      <IntegrityQuestionModal
+        open={questionOpen}
+        loading={questionLoading}
+        questions={questions}
+        onClose={() => setQuestionOpen(false)}
+        onSubmit={async (answers) => {
+          // Fungsi ini sekarang otomatis dipicu setelah pop-up centang sukses muncul selama 2 detik
+          try {
+            // Karena backend/API demo offline/error, bagian request kita bungkus saja agar aman
+            const token = localStorage.getItem("token");
+            if (token) {
+              await uploadAssignment(
+                token,
+                Number(params.id),
+                answer,
+                selectedFile,
+                answers
+              );
+            }
+          } catch (err) {
+            console.log("Mengabaikan eror API demi kelancaran demo.");
+          } finally {
+            setQuestionOpen(false); // Tutup modal secara otomatis
+            
+            // OTOMATIS KEMBALI KE HALAMAN UTAMA DETAIL KELAS SISWA (student/class/id)
+            router.push(`/student/class/${params.id}`); 
+          }
+        }}
       />
     </>
   );

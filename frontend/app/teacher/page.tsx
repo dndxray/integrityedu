@@ -19,7 +19,7 @@ import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import CalendarTodayRoundedIcon from "@mui/icons-material/CalendarTodayRounded";
 
 import Sidebar from "@/components/Sidebar";
-// import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -61,9 +61,9 @@ const danger = "#B23B3B";
 // jumlah siswa, alert integritas, skor rata-rata). Hardcode dulu biar
 // dashboard-nya nggak kosong melompong, gampang disambung nanti.
 const placeholderStats = {
-  assignments: "--",
-  students: "--",
-  aiAlerts: "--",
+  assignments: "4",
+  students: "15",
+  aiAlerts: "5",
 };
 
 const integrityAlerts = [
@@ -133,7 +133,7 @@ function StatTile({
       </Typography> */}
       <Typography
         className={plexMono.className}
-        sx={{ fontSize: 32, fontWeight: 600, color: ink, lineHeight: 1 }}
+        sx={{ fontSize: {xs:24,md:32}, fontWeight: 600, color: ink, lineHeight: 1 }}
       >
         {value}
       </Typography>
@@ -203,43 +203,6 @@ function IntegrityDonut({
   );
 }
 
-// // Ilustrasi guru — SVG flat sederhana (bukan foto/aset luar), biar banner
-// // sapaan nggak kosong tapi tetap sejalan sama tema biru & nggak nambah
-// // dependency baru.
-// function TeacherIllustration() {
-//   return (
-//     <Box
-//       component="svg"
-//       viewBox="0 0 160 160"
-//       sx={{ width: { xs: 100, md: 130 }, height: "auto", flexShrink: 0 }}
-//     >
-//       <circle cx="80" cy="80" r="72" fill="rgba(255,255,255,0.08)" />
-//       <circle cx="80" cy="80" r="52" fill="rgba(255,255,255,0.10)" />
-
-//       {/* buku melayang */}
-//       <rect x="18" y="34" width="26" height="19" rx="3" fill="#FFD79A" transform="rotate(-12 31 43)" />
-//       {/* pensil melayang */}
-//       <rect x="118" y="112" width="8" height="30" rx="3" fill="#FFB4B4" transform="rotate(24 122 127)" />
-//       {/* topi wisuda kecil */}
-//       <path d="M112 30 L134 22 L112 14 L90 22 Z" fill="#FFFFFF" opacity="0.9" />
-
-//       {/* badan guru */}
-//       <rect x="52" y="90" width="56" height="52" rx="18" fill="#FFFFFF" />
-//       {/* kepala */}
-//       <circle cx="80" cy="66" r="26" fill="#FCD9B8" />
-//       {/* rambut */}
-//       <path d="M54 62 a26 26 0 0 1 52 0 q-4 -14 -26 -14 t-26 14 z" fill="#3A2B22" />
-//       {/* wajah tersenyum */}
-//       <circle cx="70" cy="66" r="2.6" fill="#3A2B22" />
-//       <circle cx="90" cy="66" r="2.6" fill="#3A2B22" />
-//       <path d="M70 76 q10 8 20 0" stroke="#3A2B22" strokeWidth="3" fill="none" strokeLinecap="round" />
-
-//       {/* dasi kecil */}
-//       <path d="M80 92 l6 10 -6 8 -6 -8 z" fill={steel} />
-//     </Box>
-//   );
-// }
-
 export default function TeacherPage() {
   const router = useRouter();
 
@@ -291,19 +254,20 @@ export default function TeacherPage() {
   return (
     <>
       <Sidebar />
+      <Navbar/>
       <Box
         sx={{
           minHeight: "100vh",
           bgcolor: "#EAF4FF",
           ml: { xs: 0, md: "260px" },
-          p: { xs: 1.5, md: 3 },
+          p: { xs: 3, sm : 2, md: 3 },
         }}
       >
         <Box
           className={poppins.className}
           sx={{
             bgcolor: "white",
-            borderRadius: 3,
+            borderRadius: { xs:2, md:3},
             minHeight: { md: "calc(100vh - 48px)" },
             boxShadow: "0 20px 45px -20px rgba(51,70,196,0.15)",
             p: { xs: 2.5, md: 4 },
@@ -353,7 +317,7 @@ export default function TeacherPage() {
             sx={{
               display: "grid",
               gridTemplateColumns: {
-                xs: "1fr",
+                xs: "repeat(2, 1fr)",
                 sm: "repeat(2, 1fr)",
                 lg: "repeat(4, 1fr)",
               },

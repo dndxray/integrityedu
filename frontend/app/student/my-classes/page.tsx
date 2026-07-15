@@ -21,11 +21,8 @@ import {
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-
+import StudentNavbar from "@/components/StudentNavbar";
 import StudentSidebar from "@/components/StudentSidebar";
-// Navbar dimatikan sesuai halaman Dashboard — diganti search bar + tanggal
-// langsung di halaman ini. Tinggal buka comment lagi kalau mau dipakai lagi.
-// import Navbar from "@/components/Navbar";
 
 import { getMyClasses } from "@/services/student";
 
@@ -84,7 +81,7 @@ export default function MyClassesPage() {
   return (
     <>
       <StudentSidebar />
-      {/* <Navbar /> */}
+      <StudentNavbar />
 
       {/* Background lavender + panel putih rounded, konsisten sama Dashboard */}
       <Box

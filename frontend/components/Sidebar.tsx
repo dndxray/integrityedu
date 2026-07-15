@@ -198,26 +198,13 @@ export default function Sidebar() {
   return (
     <>
       {mobile ? (
-        <>
-          <IconButton
-            onClick={() => setOpen(true)}
-            sx={{
-              position: "fixed",
-              top: 12,
-              left: 12,
-              zIndex: 1400,
-              bgcolor: "#EEF0FB",
-              boxShadow: 2,
-            }}
-          >
-            <MenuRoundedIcon />
-          </IconButton>
-
-          <Drawer open={open} onClose={() => setOpen(false)}>
-            {sidebarContent}
-          </Drawer>
-        </>
+        // DI HP: Hilangkan IconButton hamburger bawaan yang mengganggu
+        // Biarkan hanya ada Drawer kosong yang dikontrol dari luar jika diperlukan
+        <Drawer open={open} onClose={() => setOpen(false)}>
+          {sidebarContent}
+        </Drawer>
       ) : (
+        // DI LAPTOP: Tetap tampil berdiri kokoh di sebelah kiri layar
         <Box
           sx={{
             position: "fixed",

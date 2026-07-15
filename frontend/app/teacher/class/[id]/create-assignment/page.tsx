@@ -16,6 +16,8 @@ import {
 
 import { createAssignment } from "@/services/assignment";
 import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+
 
 export default function CreateAssignmentPage() {
   const router = useRouter();
@@ -48,6 +50,7 @@ export default function CreateAssignmentPage() {
   return (
     <>
       <Sidebar />
+      <Navbar/>
       <Box
         sx={{
           minHeight: "100vh",

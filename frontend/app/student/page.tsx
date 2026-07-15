@@ -15,7 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
+import StudentNavbar from "@/components/StudentNavbar";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
@@ -84,25 +84,6 @@ const recentAssignments = [
   },
 ];
 
-// function BooksIllustration() {
-//   return (
-//     <Box
-//       component="svg"
-//       viewBox="0 0 220 170"
-//       sx={{ width: { xs: 140, md: 190 }, height: "auto", flexShrink: 0 }}
-//     >
-//       <ellipse cx="110" cy="150" rx="85" ry="14" fill="rgba(0,0,0,0.08)" />
-//       <g transform="translate(20,70)">
-//         <rect x="0" y="30" width="150" height="30" rx="6" fill="#3346C4" />
-//         <rect x="10" y="6" width="130" height="30" rx="6" fill="#F76B9C" />
-//         <rect x="24" y="-18" width="102" height="30" rx="6" fill="#FDE68A" />
-//         <circle cx="150" cy="-4" r="7" fill="#60A5FA" />
-//         <circle cx="10" cy="-10" r="5" fill="#F472B6" />
-//       </g>
-//     </Box>
-//   );
-// }
-
 function CalendarIllustration() {
   const today = new Date();
 
@@ -132,16 +113,6 @@ function CalendarIllustration() {
           height: "auto",
         }}
       >
-        {/* Background */}
-        {/* <rect
-          x="20"
-          y="20"
-          width="180"
-          height="180"
-          rx="28"
-          fill="#C8E04A"
-        /> */}
-
         {/* Calendar */}
         <g transform="translate(52,42)">
           {/* Body */}
@@ -219,9 +190,6 @@ export default function StudentPage() {
     console.log(data);
     setClasses(data);
 
-    // Belum ada endpoint "total tugas semua kelas" langsung, jadi kita
-    // loop tiap kelas yang diikuti terus jumlahin assignment-nya satu-satu
-    // pakai endpoint yang sama kayak di StudentClassPage.
     try {
       const counts = await Promise.all(
         (data ?? []).map(async (cls: any) => {
@@ -251,18 +219,10 @@ export default function StudentPage() {
     loadData();
   }, []);
 
-  // // Tanggal hari ini beneran (bukan hardcode), format kaya "12 Mei 2022, Jumat"
-  // const today = new Date().toLocaleDateString("id-ID", {
-  //   weekday: "long",
-  //   day: "numeric",
-  //   month: "long",
-  //   year: "numeric",
-  // });
-
   return (
     <>
       <StudentSidebar />
-      {/* <Navbar /> */}
+      <StudentNavbar />
 
       {/* Background lembut di belakang panel putih, biar transisi dari
           sidebar ke konten kerasa nyambung/ngambang, bukan nempel rata. */}
@@ -431,34 +391,6 @@ export default function StudentPage() {
                   </Typography>
                   <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
                     segera selesaikan
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-              <Card sx={{ borderRadius: 2, height: "100%", boxShadow: "none", border: "1px solid #EEF0F6" }}>
-                <CardContent>
-                  <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 14 }}>
-                      Skor Integritas
-                    </Typography>
-                    <Box
-                      sx={{
-                        width: 32, height: 32, borderRadius: 1.25,
-                        bgcolor: "#ECFDF5", color: "#059669",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}
-                    >
-                      <VerifiedUserRoundedIcon fontSize="small" />
-                    </Box>
-                  </Stack>
-                  {/* TODO: ambil dari endpoint skor integritas AI */}
-                  <Typography variant="h4" sx={{ color: "#059669", fontWeight: 800, mt: 2 }}>
-                    98%
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary", fontSize: 13, mt: 0.5 }}>
-                    rata-rata semua tugas
                   </Typography>
                 </CardContent>
               </Card>

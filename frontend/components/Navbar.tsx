@@ -1,91 +1,186 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Poppins } from "next/font/google";
+
 import {
   AppBar,
-  Avatar,
   Box,
   IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
   Toolbar,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded"; 
+import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import ClassRoundedIcon from "@mui/icons-material/ClassRounded";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined"; // Tambahkan icon logout
 
-import { useTheme } from "@mui/material/styles";
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const ink = "#0B2545";
+const steel = "#2C6E9E";
+const line = "#D9E3F0";
 
 export default function Navbar() {
-  const theme = useTheme();
+  const router = useRouter();
 
-  const mobile = useMediaQuery(
-    theme.breakpoints.down("md")
-  );
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigate = (path: string) => {
+    router.push(path);
+    handleCloseMenu();
+  };
+
+  // Fungsi Logout di Mobile
+  function handleLogout() {
+    localStorage.removeItem("token");
+    router.push("/login");
+    handleCloseMenu();
+  }
 
   return (
     <AppBar
-      position="fixed"
+      position="sticky"
       elevation={0}
+      className={poppins.className}
       sx={{
         bgcolor: "white",
-        color: "black",
-        borderBottom: "1px solid #E5E7EB",
-
-        ml: {
-          xs: 0,
-          md: 260,
-        },
-
-        width: {
-          xs: "100%",
-          md: "calc(100% - 260)",
-        },
+        color: ink,
+        borderBottom: `1px solid ${line}`,
+        width: "100%",
+        top: 0,
         boxSizing: "border-box",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        display: { xs: "block", md: "none" }, // Hanya muncul di HP
       }}
     >
       <Toolbar
-  sx={{
-    minHeight: "64px !important",
-    height: 64,
-    display: "flex",
-    justifyContent: "space-between",
-  }}
+        sx={{
+          minHeight: "64px !important",
+          height: 64,
+          display: "flex",
+          justifyContent: "space-between",
+          px: 2,
+        }}
       >
-        <Box
+        {/* KIRI: Tombol Back */}
+        <IconButton
+          onClick={() => router.back()}
+          edge="start"
           sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
+            color: ink,
+            border: `1px solid ${line}`,
+            borderRadius: 1.5,
+            p: 1,
+            "&:hover": { bgcolor: "#F6FAFE", borderColor: steel },
           }}
         >
-          {mobile && (
-            <Box
-              sx={{
-                width: 35,
-              }}
-            />
-          )}
-        </Box>
+          <ArrowBackRoundedIcon />
+        </IconButton>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          {!mobile && (
-            <Typography color="text.secondary">
-              Welcome
-            </Typography>
-          )}
+        {/* TENGAH: Nama Aplikasi */}
+        <Typography sx={{ fontWeight: 700, fontSize: 18, color: ink, letterSpacing: -0.3 }}>
+          IntegrityEdu
+        </Typography>
 
-          <Avatar
+        {/* KANAN: Tombol Titik 3 / Dropdown Menu */}
+        <Box>
+          <IconButton
+            onClick={handleOpenMenu}
+            edge="end"
             sx={{
-              bgcolor: "#2563EB",
+              color: ink,
+              border: `1px solid ${line}`,
+              borderRadius: 1.5,
+              p: 1,
+              "&:hover": { bgcolor: "#F6FAFE", borderColor: steel },
             }}
           >
-            U
-          </Avatar>
+            <MoreVertRoundedIcon />
+          </IconButton>
+
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleCloseMenu}
+            slotProps={{
+              paper: {
+                sx: {
+                  mt: 1.5,
+                  borderRadius: 2,
+                  boxShadow: "0 10px 25px -5px rgba(51,70,196,0.12)",
+                  border: `1px solid ${line}`,
+                  minWidth: 180,
+                  p: 0.5,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          >
+            <MenuItem 
+              onClick={() => handleNavigate("/teacher")}
+              sx={{ py: 1.2, borderRadius: 1.5, gap: 1, color: ink, fontWeight: 600, fontSize: 14 }}
+            >
+              <ListItemIcon sx={{ color: steel }}><DashboardRoundedIcon fontSize="small" /></ListItemIcon>
+              Dashboard
+            </MenuItem>
+
+            <MenuItem 
+              onClick={() => handleNavigate("/teacher/class")}
+              sx={{ py: 1.2, borderRadius: 1.5, gap: 1, color: ink, fontWeight: 600, fontSize: 14 }}
+            >
+              <ListItemIcon sx={{ color: steel }}><ClassRoundedIcon fontSize="small" /></ListItemIcon>
+              My Classes
+            </MenuItem>
+
+            <MenuItem 
+              onClick={() => handleNavigate("/teacher/create-class")}
+              sx={{ py: 1.2, borderRadius: 1.5, gap: 1, color: ink, fontWeight: 600, fontSize: 14 }}
+            >
+              <ListItemIcon sx={{ color: steel }}><AddCircleRoundedIcon fontSize="small" /></ListItemIcon>
+              Add Classes
+            </MenuItem>
+
+            {/* OPSI LOGOUT DI NAVBAR HP */}
+            <MenuItem 
+              onClick={handleLogout}
+              sx={{ 
+                py: 1.2, 
+                borderRadius: 1.5, 
+                gap: 1, 
+                color: "#e01515", 
+                fontWeight: 700, 
+                fontSize: 14,
+                borderTop: `1px solid ${line}`,
+                mt: 0.5,
+                pt: 1.5,
+                "&:hover": { color: "#DC2626" }
+              }}
+            >
+              <ListItemIcon sx={{ color: "#e01515" }}><LogoutOutlinedIcon fontSize="small" /></ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </Box>
       </Toolbar>
     </AppBar>

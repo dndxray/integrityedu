@@ -13,7 +13,7 @@ import {
 
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-// import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
 import { createClass } from "@/services/class";
@@ -69,6 +69,7 @@ export default function CreateClassPage() {
   return (
     <>
       <Sidebar />
+      <Navbar/>
       <Box
         sx={{
           minHeight: "100vh",

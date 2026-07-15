@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import Navbar from "@/components/Navbar";
+import StudentNavbar from "@/components/StudentNavbar";
 import StudentSidebar from "@/components/StudentSidebar";
 
 import { getMyAssignments } from "@/services/assignment";
@@ -48,8 +48,8 @@ export default function AssignmentsPage() {
   if (loading) {
     return (
       <>
-        <StudentSidebar />
-        <Navbar />
+      <StudentSidebar />
+      <StudentNavbar />
 
         <Box
           sx={{
@@ -72,7 +72,7 @@ export default function AssignmentsPage() {
   return (
     <>
       <StudentSidebar />
-      <Navbar />
+      <StudentNavbar />
 
       <Box
         sx={{

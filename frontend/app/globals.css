@@ -1,4 +1,22 @@
 @import "tailwindcss";
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none !important;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+::-ms-reveal {
+  display: none !important;
+}
+
+::-ms-clear {
+  display: none !important;
+}
 
 :root {
   --background: #ffffff;
